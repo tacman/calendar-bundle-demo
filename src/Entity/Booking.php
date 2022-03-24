@@ -24,6 +24,11 @@ class Booking
     #[ORM\Column(type: 'string', length: 255)]
     private $title;
 
+    public function __construct()
+    {
+        $this->beginAt = new \DateTimeImmutable();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
