@@ -36,6 +36,16 @@ class AdminMenu extends BaseAdminMenu
             ->add('view')->route('booking_calendar')->end()
 
         ;
+
+        // Create a nested entry
+        $root->add('Stimulus')
+            ->icon('uil-apps')
+            ->add('stimulus')
+            ->route('app_stimulus')
+            ->end()
+
+        ;
+
     }
 
 }

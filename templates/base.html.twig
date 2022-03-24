@@ -1,14 +1,19 @@
 {# templates/admin/home/index.html.twig #}
 {% extends "@UmbrellaAdmin/layout.html.twig" %}
 
-{# symfony crud creates everything in a body block, but umbrella uses a content block. :-( #}
-{% block content %}
-    <h1>content</h1>
-{{ block('body') }}
+{% block javascripts %}
+{{ encore_entry_script_tags('app') }}
+{{ parent() }}
 {% endblock %}
 
-{% set admin_menu = get_menu('App\\Menu\\AdminMenu', {  }) %}
 
+{% block stylesheets %}
+    {{ encore_entry_link_tags('app') }}
+    {{ parent() }}
+{% endblock %}
+
+
+{% set admin_menu = get_menu('App\\Menu\\AdminMenu', {  }) %}
 {% block sidebar %}
     {{ render_menu(admin_menu, {  }) }}
 {% endblock %}

@@ -14,4 +14,11 @@ class AppController extends AbstractController
         return $this->render('app/index.html.twig', [
         ]);
     }
+
+    #[Route('/stimulus', name: 'app_stimulus')]
+    public function stimulus(): Response
+    {
+        return $this->render('app/stimulus.html.twig', [
+        ]);
+    }
 }

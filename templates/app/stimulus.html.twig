@@ -1,0 +1,74 @@
+{# templates/booking/calendar.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block content %}
+
+
+    {% set _controller = 'fullcalendar' %}
+<div {{ stimulus_controller(_controller, {
+    url: path('fc_load_events')
+}) }} >
+
+    <div {{ stimulus_target(_controller, 'calendar') }}>
+        calendar here.
+    </div>
+
+
+
+    <div {{ stimulus_target(_controller, 'modal') }}
+            class="modal fade"
+            tabindex="-1"
+            aria-hidden="true"
+    >
+        <div class="modal-dialog {{ modalClass|default('') }}">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">{{ modalTitle|default('title') }}</h5>
+                    <button type="button" class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close">
+                    </button>
+                </div>
+
+                <div class="modal-body" {{ stimulus_target(_controller, 'modalBody') }} >
+                    {{ modalContent|default('Loading...') }}
+                </div>
+
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary"
+                            data-bs-dismiss="modal">Cancel
+                    </button>
+
+                    <a type="button" class="btn btn-secondary" href="{{ formUrl|default('#') }}">
+                        Open <span class="fas fa-external-link-alt"></span>
+                    </a>
+
+                    <button type="button" class="btn btn-primary" {{ stimulus_action(_controller, 'submitForm') }}>
+                        Save
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    </div>
+</div>
+
+
+{#{{  }}#}
+{#    {% set _controller = 'fullcalendar' %}#}
+{#    <div {{ stimulus_controller(_controller, {#}
+
+{#    }) }}>#}
+
+{#        url: path('fc_load_events')#}
+
+{#        <div {{ stimulus_target(_controller, 'msg') }}></div>#}
+{#        <div {{ stimulus_target(_controller, 'calendar') }}>#}
+
+{#        </div>#}
+{#    </div>#}
+{% endblock %}
