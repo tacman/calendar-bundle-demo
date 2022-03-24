@@ -1,57 +1,57 @@
-
-
 {# templates/booking/calendar.html.twig #}
 {% extends 'base.html.twig' %}
 
-{% block body %}
-    <a href="{{ path('booking_new') }}">Create new booking</a>
+{% block content %}
 
-    <div id="calendar-holder"></div>
-{% endblock %}
+    <h1>Calendar Bundle Demo</h1>
 
-{% block stylesheets %}
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fullcalendar/core@4.1.0/main.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@4.1.0/main.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid@4.1.0/main.min.css">
-{% endblock %}
+    This is a working example of using <a href="https://github.com/tattali/CalendarBundle">CalendarBundle</a>, which integrates events from a database within a Symfony application with <a href="https://fullcalendar.io/">FullCalendar.io</a>.
 
-{% block javascripts %}
-    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core@4.1.0/main.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/interaction@4.1.0/main.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@4.1.0/main.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid@4.1.0/main.min.js"></script>
 
-    <a href="{{ path('booking_index') }}">List of events</a>
-    <a href="{{ path('booking_new') }}">New Event</a>
 
-    <script type="text/javascript">
-        document.addEventListener('DOMContentLoaded', () => {
-            var calendarEl = document.getElementById('calendar-holder');
+    {% embed '_partial/card.html.twig' with { links:
+        {
+        'CRUD example documentation' : 'https://github.com/tattali/CalendarBundle/blob/master/src/Resources/doc/doctrine-crud.md'
+        }
+    } %}
+        {% block title 'Basic ' %}
+        {% block subtitle 'Simple Booking Calendar' %}
+        {% block text %}
+            <p>
+                This is <em>almost</em> exactly what is created following the basic Doctrine crud example on the bundle's documentation.
+            </p>
 
-            var calendar = new FullCalendar.Calendar(calendarEl, {
-                defaultView: 'dayGridMonth',
-                editable: true,
-                eventSources: [
-                    {
-                        url: "{{ path('fc_load_events') }}",
-                        method: "POST",
-                        extraParams: {
-                            filters: JSON.stringify({})
-                        },
-                        failure: () => {
-                            // alert("There was an error while fetching FullCalendar!");
-                        },
-                    },
-                ],
-                header: {
-                    left: 'prev,next today',
-                    center: 'title',
-                    right: 'dayGridMonth,timeGridWeek,timeGridDay',
-                },
-                plugins: [ 'interaction', 'dayGrid', 'timeGrid' ], // https://fullcalendar.io/docs/plugin-index
-                timeZone: 'UTC',
-            });
-            calendar.render();
-        });
-    </script>
+            The exceptions:
+            <ul>
+                <li>The entity uses attributes instead of annotations</li>
+            </ul>
+
+        {% endblock %}
+
+    {% endembed %}
+
+
+    <p>
+        A challenge of any demo site is how to present something attractive without complicating the code with the theme.  For this application, I did the following:
+    </p>
+    <ol>
+        <li>Create the project with symfony: <code>symfony new --webapp calendar-bundle-demo</code>
+        </li>
+        <li>
+            Add umbrella admin: <code>composer require umbrella2/adminbundle</code>
+            and configure the menu.
+        </li>
+        <li>
+            Install <a href="https://github.com/tattali/CalendarBundle">tattali/CalendarBundle</a>, and create the Booking.php entity, then create CRUD using <code>bin/console make:crud Booking</code>
+        </li>
+        <li>
+            Change <code>base.html.twig</code> to extend the umbrella base, and add the sidebar.
+        </li>
+        <li>
+            Change the <b>body</b> block to <b>content</b>, since that's what admin bundle uses.
+        </li>
+    </ol>
+
+    <span class="fas fa-github"></span> Github
+
 {% endblock %}

@@ -1,0 +1,12 @@
+<div class="card" style="width: 40rem;">
+    <div class="card-body">
+        <h3 class="card-title">{{ block('title') }}</h3>
+        <h4 class="card-subtitle mb-2 text-muted">{{ block('subtitle') }}</h4>
+        <p class="card-text">
+            {{ block('text') }}
+        </p>
+        {% for title, link in links|default([]) %}
+            <a href="{{ link }}" class="card-link">{{ title }}</a>
+        {% endfor %}
+    </div>
+</div>

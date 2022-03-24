@@ -16,4 +16,7 @@ return [
     Nelmio\CorsBundle\NelmioCorsBundle::class => ['all' => true],
     ApiPlatform\Core\Bridge\Symfony\Bundle\ApiPlatformBundle::class => ['all' => true],
     CalendarBundle\CalendarBundle::class => ['all' => true],
+    Umbrella\CoreBundle\UmbrellaCoreBundle::class => ['all' => true],
+    Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle::class => ['all' => true],
+    Umbrella\AdminBundle\UmbrellaAdminBundle::class => ['all' => true],
 ];

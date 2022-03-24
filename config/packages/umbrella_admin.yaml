@@ -1,0 +1,4 @@
+# config/packages/umbrella_admin.yaml
+umbrella_admin:
+  app_name: Calendar Bundle Demo
+  menu: App\Menu\AdminMenu

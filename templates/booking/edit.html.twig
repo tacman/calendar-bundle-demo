@@ -2,8 +2,8 @@
 
 {% block title %}Edit Booking{% endblock %}
 
-{% block body %}
-    <h1>Edit Booking</h1>
+{% block content %}
+    <h1>Edit Booking {{ booking.id }}</h1>
 
     {{ include('booking/_form.html.twig', {'button_label': 'Update'}) }}
 
