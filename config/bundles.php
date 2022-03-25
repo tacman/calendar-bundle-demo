@@ -19,4 +19,5 @@ return [
     Umbrella\CoreBundle\UmbrellaCoreBundle::class => ['all' => true],
     Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle::class => ['all' => true],
     Umbrella\AdminBundle\UmbrellaAdminBundle::class => ['all' => true],
+    Zenstruck\Foundry\ZenstruckFoundryBundle::class => ['dev' => true, 'test' => true],
 ];

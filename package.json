@@ -1,10 +1,13 @@
 {
     "devDependencies": {
         "@hotwired/stimulus": "^3.0.0",
+        "@popperjs/core": "^2.11.4",
         "@symfony/stimulus-bridge": "^3.0.0",
         "@symfony/webpack-encore": "^1.7.0",
         "core-js": "^3.0.0",
         "regenerator-runtime": "^0.13.2",
+        "simple-datatables": "^3.2.0",
+        "sweetalert2": "^11.4.7",
         "webpack-notifier": "^1.6.0"
     },
     "license": "UNLICENSED",
