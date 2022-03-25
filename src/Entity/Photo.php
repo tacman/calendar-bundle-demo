@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\PhotoRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: PhotoRepository::class)]
@@ -24,6 +26,14 @@ class Photo
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'photos')]
     #[ORM\JoinColumn(nullable: false)]
     private $photographer;
+
+    #[ORM\ManyToMany(targetEntity: Contest::class, mappedBy: 'photos')]
+    private $contests;
+
+    public function __construct()
+    {
+        $this->contests = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -62,6 +72,33 @@ class Photo
     public function setPhotographer(?User $photographer): self
     {
         $this->photographer = $photographer;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Contest>
+     */
+    public function getContests(): Collection
+    {
+        return $this->contests;
+    }
+
+    public function addContest(Contest $contest): self
+    {
+        if (!$this->contests->contains($contest)) {
+            $this->contests[] = $contest;
+            $contest->addPhoto($this);
+        }
+
+        return $this;
+    }
+
+    public function removeContest(Contest $contest): self
+    {
+        if ($this->contests->removeElement($contest)) {
+            $contest->removePhoto($this);
+        }
 
         return $this;
     }

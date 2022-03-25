@@ -1,0 +1,120 @@
+{# templates/booking/calendar.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block javascripts %}
+{{ parent() }}
+    <script>
+        document.addEventListener(
+            "DOMContentLoaded", () => {
+                new Mmenu( "#menu", {
+                    // options
+                }, {
+                    // configuration
+                });
+            }
+        );
+    </script>
+{% endblock %}
+                {% block sidebar %}
+                    <nav id="menu">
+                        <ul>
+                            <li><a href="/">Home</a></li>
+                            <li><a href="/about/">About us</a>
+                                <ul>
+                                    <li><a href="/about/history/">History</a></li>
+                                    <li><a href="/about/team/">The team</a></li>
+                                    <li><a href="/about/address/">Our address</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="/contact/">Contact</a></li>
+                        </ul>
+                    </nav>
+                {% endblock %}
+
+{% block content %}
+
+<div id="page"}>
+    The page content is here.
+</div>
+
+{% endblock %}
+
+
+{% block stimulus %}
+<h3>MMenu</h3>
+
+
+
+    {% set _controller = 'mmenu' %}
+
+    <div {{ stimulus_controller(_controller) }}>
+
+
+    <div {{ stimulus_target(_controller, 'msg') }}></div>
+
+    <nav id="menu"  }}>
+        <ul {{ stimulus_target(_controller, 'menu') }}>
+            <li><a href="/">Home</a></li>
+            <li><a href="/about/">About us</a>
+                <ul>
+                    <li><a href="/about/history/">History</a></li>
+                    <li><a href="/about/team/">The team</a></li>
+                    <li><a href="/about/address/">Our address</a></li>
+                </ul>
+            </li>
+            <li><a href="/contact/">Contact</a></li>
+        </ul>
+    </nav>
+    </div>
+
+
+{% endblock %}
+
+{% block other %}
+    <h3>Horizontal Menu</h3>
+    <div class="col-md-6">
+        <ul class="st-menu st-menu--horizontal" data-controller="menu">
+            <li>
+                <span class="st-menu__icon"><a href="#">Menu1</a></span>
+                <ul class="st-menu--vertical">
+                    <li><a href="#">Menu1-1</a></li>
+                    <li><a href="#">Menu1-2</a></li>
+                    <li><a href="#">Menu1-3</a></li>
+                </ul>
+            </li>
+
+            <li>
+                <span class="st-menu__icon"><a href="#">Menu2</a></span>
+                <ul class="st-menu--vertical">
+                    <li><a href="#">Menu2-1</a></li>
+                    <li><a href="#">Menu2-2</a></li>
+                    <li><a href="#">Menu2-3</a></li>
+                </ul>
+            </li>
+        </ul>
+
+    </div>
+
+    <h3>Vertical Menu</h3>
+<div class="col-md-3">
+    <!-- set st-menu--vertial -->
+    <ul class="st-menu st-menu--vertical" data-controller="menu">
+        <li>
+            <span class="st-menu__icon"><a href="#">Menu1</a></span>
+            <ul class="st-menu--vertical">
+                <li><a href="#">Menu1-1</a></li>
+                <li><a href="#">Menu1-2</a></li>
+                <li><a href="#">Menu1-3</a></li>
+            </ul>
+        </li>
+        <li>
+            <span class="st-menu__icon"><a href="#">Menu2</a></span>
+            <ul class="st-menu--vertical">
+                <li><a href="#">Menu2-1</a></li>
+                <li><a href="#">Menu2-2</a></li>
+                <li><a href="#">Menu2-3</a></li>
+            </ul>
+        </li>
+    </ul>
+</div>
+{% endblock %}

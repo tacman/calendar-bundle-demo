@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="author" content="https://www.frebsite.nl" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <title>mmenu - Demo</title>
+
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    {{ encore_entry_link_tags('app') }}
+
+<body {{ stimulus_controller('mmenu_light') }}>
+<div id="page">
+
+    <div id="header">
+        <a href="#menu" class="fa fa-bars"></a>
+        <a href="#page" class="fa fa-close"></a>
+        <span>demo</span>
+    </div>
+    <div id="content">
+        <h4>This is a demo.</h4>
+        <p>Click the menu icon to toggle the menu.</p>
+    </div>		</div>
+
+<nav id="menu">
+    <ul id="panel-menu">
+        <li><a href="#/">Home</a></li>
+        <li><a href="#/work">Our work</a></li>
+        <li><span>About us</span>
+            <ul>
+                <li><a href="#/about/history">History</a></li>
+                <li><span>The team</span>
+                    <ul>
+                        <li><a href="#/about/team/management">Management</a></li>
+                        <li><a href="#/about/team/sales">Sales</a></li>
+                        <li><a href="#/about/team/development">Development</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li><span>Services</span>
+            <ul>
+                <li><a href="#/services/design">Design</a></li>
+                <li><a href="#/services/development">Development</a></li>
+                <li><a href="#/services/marketing">Marketing</a></li>
+            </ul>
+        </li>
+        <li><a href="#/contact">Contact</a></li>
+    </ul>
+</nav>
+<script src="js/playground.js"></script>
+
+{{ encore_entry_script_tags('app') }}
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+
+    });
+</script>
+</body>
+</html>
+

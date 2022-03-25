@@ -40,8 +40,15 @@ class AdminMenu extends BaseAdminMenu
         // Create a nested entry
         $root->add('Stimulus')
             ->icon('uil-apps')
-            ->add('stimulus')
             ->route('app_stimulus')
+            ->end()
+
+        ;
+
+        // Create a nested entry
+        $root->add('Menu')
+            ->icon('uil-apps')
+            ->route('app_menu')
             ->end()
 
         ;
