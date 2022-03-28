@@ -1,0 +1,71 @@
+<?php
+declare(strict_types=1);
+
+namespace App\Request\ParamConverter;
+
+use App\Entity\Contest;
+
+use Doctrine\Persistence\ManagerRegistry;
+use Exception;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\ParamConverterInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+
+class ContestParamConverter implements ParamConverterInterface
+{
+    public function __construct(private ManagerRegistry $registry)
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * Check, if object supported by our converter
+     */
+    public function supports(ParamConverter $configuration): bool
+    {
+        return Contest::class == $configuration->getClass();
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * Applies converting
+     *
+     * @throws \InvalidArgumentException When route attributes are missing
+     * @throws NotFoundHttpException     When object not found
+     * @throws Exception
+     */
+    public function apply(Request $request, ParamConverter $configuration): bool
+    {
+        $params = $request->attributes->get('_route_params');
+
+//        if (isset($params['contestId']) && ($contestId = $request->attributes->get('contestId')))
+
+        $contestId = $request->attributes->get('contestId');
+        if ($contestId === 'undefined') {
+            throw new Exception("Invalid contestId " . $contestId);
+        }
+
+        // Check, if route attributes exists
+        if (null === $contestId ) {
+            if (!isset($params['contestId'])) {
+                return false; // no contestId in the route, so leave.  Could throw an exception.
+            }
+        }
+
+        // Get actual entity manager for class.  We can also pass it in, but that won't work for the doctrine tree extension.
+        $repository = $this->registry->getManagerForClass($configuration->getClass())?->getRepository($configuration->getClass());
+
+        // Try to find the entity
+        if (!$contest = $repository->findOneBy(['id' => $contestId])) {
+            throw new NotFoundHttpException(sprintf('%s %s object not found.', $contestId, $configuration->getClass()));
+        }
+
+        // Map found contest to the route's parameter
+        $request->attributes->set($configuration->getName(), $contest);
+        return true;
+    }
+
+}

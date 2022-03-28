@@ -1,4 +1,5 @@
 import {Controller} from '@hotwired/stimulus';
+import mmenu from "mmenu-js";
 
 export default class extends Controller {
     static targets = ['menu', 'msg', 'page'];
@@ -12,13 +13,18 @@ export default class extends Controller {
         // if (!this.hasMenuTarget) {
         //     this.menuTarget = this.element.querySelector('#menu');
         // }
-        console.warn('hello from ' + this.identifier);
+        console.warn('hello from ' + this.identifier, this.hasMenuTarget ? 'target exists' : 'missing menu target');
+        if (!this.hasMenuTarget) {
+            return;
+        }
+        console.assert(this.hasMenuTarget, "missing menu target");
+
 
         this.msgTarget.innerHTML = 'loading ' + this.currentMenuItemValue;
 
         // const Mmenu = require('mmenu-js');
         // let m = this.menuTarget;
-        const menu = new Mmenu( '#menu', {
+        const menu = new Mmenu( this.menuTarget, {
             slidingSubmenus: false,
             offCanvas: {
                 page: {

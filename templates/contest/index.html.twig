@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contest index{% endblock %}
+
+
+{% block body %}
+    <h1>Contest index</h1>
+
+    {% include "contest/_table.html.twig" %}
+
+    <a class="btn btn-primary" href="{{ path('app_contest_new') }}"><span class="fas fa-plus"></span>New  Contest</a>
+{% endblock %}

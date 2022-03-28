@@ -1,0 +1,8 @@
+{% extends "app_contest/base.html.twig" %}
+
+{% block body %}
+    <h1>Edit Contest</h1>
+
+    {{ include('app_contest/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('app_contest/_delete_form.html.twig') }}
+{% endblock %}

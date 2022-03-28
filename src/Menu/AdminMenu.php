@@ -2,6 +2,7 @@
 
 namespace App\Menu;
 
+use Survos\BaseBundle\Menu\AdminMenuTrait;
 use Umbrella\AdminBundle\Menu\BaseAdminMenu;
 use Umbrella\CoreBundle\Menu\Builder\MenuBuilder;
 use Umbrella\CoreBundle\Menu\DTO\Breadcrumb;
@@ -9,12 +10,17 @@ use Umbrella\CoreBundle\Menu\DTO\Menu;
 
 class AdminMenu extends BaseAdminMenu
 {
+    use AdminMenuTrait;
     /**
      * {@inheritDoc}
      */
     public function buildMenu(MenuBuilder $builder, array $options)
     {
         $root = $builder->root();
+
+        $this->addMenuItem($root, ['route' => 'booking_index']);
+
+
 
         // Create a new entry with route
         $root->add('welcome')

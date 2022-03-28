@@ -1,0 +1,38 @@
+
+
+<table class="table js-datatable">
+    <thead>
+    <tr>
+        <th>actions</th>
+                    <th>Id</th>
+                    <th>Title</th>
+                    <th>StartDate</th>
+                    <th>Duration</th>
+            </tr>
+    </thead>
+    <tbody>
+    {% for contest in contests %}
+    <tr>
+        <td>
+            <a href="{{ path('app_contest_show', contest.rp) }}">
+                <span class="fas fa-eye"></span>
+                <i class="bi bi-info"></i>
+            </a>
+            <a href="{{ path('app_contest_edit', contest.rp) }}">
+                <span class="fas fa-edit"></span>
+                <i class="bi bi-pencil"></i>
+            </a>
+        </td>
+
+                    <td>{{ contest.id }}</td>
+                    <td>{{ contest.title }}</td>
+                    <td>{{ contest.startDate ? contest.startDate|date('Y-m-d') : '' }}</td>
+                    <td>{{ contest.duration }}</td>
+            </tr>
+    {% else %}
+    <tr>
+        <td colspan="5">no records found</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
