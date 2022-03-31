@@ -32,7 +32,10 @@
                         url: "{{ path('fc_load_events') }}",
                         method: "POST",
                         extraParams: {
-                            filters: JSON.stringify({})
+                            anExtraParam: 'url for example',
+                            filters: JSON.stringify({
+                                'icsUrl' : 'https://www.officeholidays.com/ics/usa/arizona',
+                            })
                         },
                         failure: () => {
                             // alert("There was an error while fetching FullCalendar!");

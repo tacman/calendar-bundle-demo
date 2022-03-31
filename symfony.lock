@@ -121,6 +121,9 @@
     "gedmo/doctrine-extensions": {
         "version": "v3.6.0"
     },
+    "graceas/php-ics-reader": {
+        "version": "v1.1"
+    },
     "guzzlehttp/guzzle": {
         "version": "7.4.2"
     },
