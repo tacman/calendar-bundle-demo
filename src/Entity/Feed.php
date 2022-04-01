@@ -4,9 +4,11 @@ namespace App\Entity;
 
 use App\Repository\FeedRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Survos\BaseBundle\Entity\SurvosBaseEntity;
 
 #[ORM\Entity(repositoryClass: FeedRepository::class)]
-class Feed
+class Feed extends SurvosBaseEntity
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -29,6 +31,29 @@ class Feed
         return $this->url;
     }
 
+    #[ORM\Column(length: 255, unique: true)]
+    #[Gedmo\Slug(fields: ['url'])]
+    private string $slug;
+
+    /**
+     * @return string
+     */
+    public function getSlug(): string
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @param string $slug
+     * @return Feed
+     */
+    public function setSlug(string $slug): Feed
+    {
+        $this->slug = $slug;
+        return $this;
+    }
+
+
     public function setUrl(string $url): self
     {
         $this->url = $url;
@@ -47,4 +72,11 @@ class Feed
 
         return $this;
     }
+
+    function getUniqueIdentifiers(): array
+    {
+        return ['slug' => $this->getSlug()];
+    }
+
+
 }
