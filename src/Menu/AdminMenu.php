@@ -19,6 +19,8 @@ class AdminMenu extends BaseAdminMenu
         $root = $builder->root();
 
         $this->addMenuItem($root, ['route' => 'booking_index']);
+        $this->addMenuItem($root, ['route' => 'feed_index']);
+        $this->addMenuItem($root, ['route' => 'feed_new']);
 
 
 
