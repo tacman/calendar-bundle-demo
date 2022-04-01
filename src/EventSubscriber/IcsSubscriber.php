@@ -37,7 +37,11 @@ class IcsSubscriber implements EventSubscriberInterface
 
         $icsUrl = $filters['icsUrl'];
 
-        $icsCalendar = $this->calendarService->loadByUrl($icsUrl);
+        try {
+            $icsCalendar = $this->calendarService->loadByUrl($icsUrl);
+        } catch (\Exception $exception) {
+            return;
+        }
         $events = $icsCalendar->getEvents();
         foreach ($events as $icsEvent) {
             // this create the events with your data (here booking data) to fill calendar

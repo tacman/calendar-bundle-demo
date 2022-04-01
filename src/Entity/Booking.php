@@ -15,18 +15,21 @@ class Booking
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\Column(type: 'datetime_immutable')]
+    #[ORM\Column(type: 'datetime')]
     private $beginAt;
 
-    #[ORM\Column(type: 'datetime_immutable', nullable: true)]
+    #[ORM\Column(type: 'datetime', nullable: true)]
     private $endAt;
 
     #[ORM\Column(type: 'string', length: 255)]
     private $title;
 
+    #[ORM\Column(type: 'integer', nullable: true)]
+    private $durationInMinutes;
+
     public function __construct()
     {
-        $this->beginAt = new \DateTimeImmutable();
+        $this->beginAt = new \DateTime();
     }
 
     public function getId(): ?int
@@ -34,24 +37,24 @@ class Booking
         return $this->id;
     }
 
-    public function getBeginAt(): ?\DateTimeImmutable
+    public function getBeginAt(): \DateTime
     {
         return $this->beginAt;
     }
 
-    public function setBeginAt(\DateTimeImmutable $beginAt): self
+    public function setBeginAt(\DateTime $beginAt): self
     {
         $this->beginAt = $beginAt;
 
         return $this;
     }
 
-    public function getEndAt(): ?\DateTimeImmutable
+    public function getEndAt(): ?\DateTime
     {
         return $this->endAt;
     }
 
-    public function setEndAt(?\DateTimeImmutable $endAt): self
+    public function setEndAt(?\DateTime $endAt): self
     {
         $this->endAt = $endAt;
 
@@ -66,6 +69,33 @@ class Booking
     public function setTitle(string $title): self
     {
         $this->title = $title;
+
+        return $this;
+    }
+
+    public function getDurationInMinutes(): ?int
+    {
+        return $this->durationInMinutes;
+    }
+
+    public function setDurationInMinutes(?int $durationInMinutes): self
+    {
+        $this->durationInMinutes = $durationInMinutes;
+        if ($durationInMinutes) {
+//            $endAt = \DateTimeImmutable::createFromMutable($this->getBeginAt());
+            $endAt = clone $this->getBeginAt();
+
+//            $endAt = \DateTimeImmutable::createFromMutable($beginAt);
+
+            $date = date_create('2000-01-01');
+            date_add($date, date_interval_create_from_date_string('10 days'));
+
+            $endAt->add(new \DateInterval($format = sprintf('P%dD', $durationInMinutes)));
+//                assert($endAt <> $this->getBeginAt());
+
+//            $this->setEndAt(\DateTime::createFromImmutable($endAt));
+            assert($this->getEndAt() <> $this->getBeginAt(), $format);
+        }
 
         return $this;
     }
