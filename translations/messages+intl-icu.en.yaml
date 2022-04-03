@@ -1,0 +1,12 @@
+label.sign_in: __label.sign_in
+home: Home
+'Add item': '__Add item'
+Booking:
+  subtitle: The example from calendar-bundle
+  description: | 
+    This is _almost_ exactly what is created following the basic Doctrine crud example on the bundle's documentation. 
+    
+    <a href= 'https://github.com/tattali/CalendarBundle/blob/master/src/Resources/doc/doctrine-crud.md' target="_blank">Crud instructions</a>
+View: View Calendar
+List: List Events
+New: New Event
