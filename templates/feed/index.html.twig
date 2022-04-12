@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Feed index{% endblock %}
+
+
+{% block body %}
+    <h1>Feed index</h1>
+
+    {% include "feed/_table.html.twig" %}
+
+    <a class="btn btn-primary" href="{{ path('feed_new') }}"><span class="fas fa-plus"></span>New  Feed</a>
+{% endblock %}

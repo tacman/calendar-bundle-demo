@@ -1,0 +1,26 @@
+
+
+
+<p>
+    A challenge of any demo site is how to present something attractive without complicating the code with the theme.  For this application, I did the following:
+</p>
+<ol>
+    <li>Create the project with symfony: <code>symfony new --webapp calendar-bundle-demo</code>
+    </li>
+    <li>
+        Add umbrella admin: <code>composer require umbrella2/adminbundle</code>
+        and configure the menu.
+    </li>
+    <li>
+        Install <a href="https://github.com/tattali/CalendarBundle">tattali/CalendarBundle</a>, and create the Booking.php entity, then create CRUD using <code>bin/console make:crud Booking</code>
+    </li>
+    <li>
+        Change <code>base.html.twig</code> to extend the umbrella base, and add the sidebar.
+    </li>
+    <li>
+        Change the <b>body</b> block to <b>content</b>, since that's what admin bundle uses.
+    </li>
+</ol>
+
+<span class="fas fa-github"></span> Github
+

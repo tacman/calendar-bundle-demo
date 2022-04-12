@@ -16,6 +16,18 @@
     "behat/transliterator": {
         "version": "v1.3.0"
     },
+    "composer/pcre": {
+        "version": "3.0.0"
+    },
+    "composer/semver": {
+        "version": "3.3.2"
+    },
+    "composer/xdebug-handler": {
+        "version": "3.0.3"
+    },
+    "dflydev/dot-access-data": {
+        "version": "v3.0.1"
+    },
     "doctrine/annotations": {
         "version": "1.13",
         "recipe": {
@@ -115,6 +127,18 @@
     "fig/link-util": {
         "version": "1.2.0"
     },
+    "friendsofphp/php-cs-fixer": {
+        "version": "3.8",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "3.0",
+            "ref": "be2103eb4a20942e28a6dd87736669b757132435"
+        },
+        "files": [
+            ".php-cs-fixer.dist.php"
+        ]
+    },
     "friendsofphp/proxy-manager-lts": {
         "version": "v1.0.7"
     },
@@ -157,6 +181,12 @@
     "laminas/laminas-code": {
         "version": "4.5.1"
     },
+    "league/commonmark": {
+        "version": "2.2.3"
+    },
+    "league/config": {
+        "version": "v1.1.1"
+    },
     "league/oauth2-client": {
         "version": "2.6.1"
     },
@@ -178,11 +208,20 @@
             "config/packages/nelmio_cors.yaml"
         ]
     },
+    "nette/schema": {
+        "version": "v1.2.2"
+    },
+    "nette/utils": {
+        "version": "v3.2.7"
+    },
     "nikic/php-parser": {
         "version": "v4.13.2"
     },
     "paragonie/random_compat": {
         "version": "v9.99.100"
+    },
+    "php-cs-fixer/diff": {
+        "version": "v2.0.2"
     },
     "phpdocumentor/reflection-common": {
         "version": "2.2.0"
@@ -252,6 +291,9 @@
     },
     "survos/maker-bundle": {
         "version": "2.1.0"
+    },
+    "survos/workflow-extension-bundle": {
+        "version": "2.0-dev"
     },
     "symfony/asset": {
         "version": "v6.0.3"
@@ -616,6 +658,18 @@
             "webpack.config.js"
         ]
     },
+    "symfony/workflow": {
+        "version": "6.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "3.3",
+            "ref": "3b2f8ca32a07fcb00f899649053943fa3d8bbfb6"
+        },
+        "files": [
+            "config/packages/workflow.yaml"
+        ]
+    },
     "symfony/yaml": {
         "version": "v6.0.3"
     },
@@ -635,6 +689,9 @@
         ]
     },
     "twig/extra-bundle": {
+        "version": "v3.3.8"
+    },
+    "twig/markdown-extra": {
         "version": "v3.3.8"
     },
     "twig/twig": {

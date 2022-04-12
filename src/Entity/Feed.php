@@ -6,10 +6,36 @@ use App\Repository\FeedRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Survos\BaseBundle\Entity\SurvosBaseEntity;
+use Survos\WorkflowBundle\Traits\MarkingInterface;
+use Survos\WorkflowBundle\Traits\MarkingTrait;
 
 #[ORM\Entity(repositoryClass: FeedRepository::class)]
-class Feed extends SurvosBaseEntity
+class Feed extends SurvosBaseEntity implements MarkingInterface
 {
+    const WORKFLOW = 'feed';
+    use MarkingTrait;
+    const ICON = 'fas fa-chart-column';
+
+    const PLACE_NEW = 'new';
+    const PLACE_BILLS_FETCHED = 'bills_fetched';
+    const PLACE_AUTO = 'auto'; // can be configured.
+    const PLACE_MANUAL = 'manual'; // can be configured.
+    const PLACE_ARCHIVED = 'archived';
+
+    const TRANSITION_AUTO= 'auto';
+    const TRANSITION_MANUAL= 'manual';
+
+    const TRANSITION_TRACK_BILLS = 'select_bills';
+    const TRANSITION_SCORE_ACTIONS = 'select_actions';
+    const TRANSITION_FETCH_BILLS = 'fetch_bills';
+    const TRANSITION_LEGISLATORS = 'fetch_legislators';
+    const TRANSITION_ARCHIVE = 'archive';
+
+    public function __construct()
+    {
+        $this->marking = self::PLACE_NEW;
+    }
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
@@ -34,6 +60,9 @@ class Feed extends SurvosBaseEntity
     #[ORM\Column(length: 255, unique: true)]
     #[Gedmo\Slug(fields: ['url'])]
     private string $slug;
+
+    #[ORM\Column(type: 'text', nullable: true)]
+    private $content;
 
     /**
      * @return string
@@ -75,7 +104,19 @@ class Feed extends SurvosBaseEntity
 
     function getUniqueIdentifiers(): array
     {
-        return ['slug' => $this->getSlug()];
+        return ['feedId' => $this->getSlug()];
+    }
+
+    public function getContent(): ?string
+    {
+        return $this->content;
+    }
+
+    public function setContent(?string $content): self
+    {
+        $this->content = $content;
+
+        return $this;
     }
 
 

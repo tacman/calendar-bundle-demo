@@ -1,0 +1,30 @@
+{% extends "feed/base.html.twig" %}
+
+{% block body %}
+    <h1>Feed: {{ feed.url }}</h1>
+    {{ include('@SurvosWorkflow/_entity_transitions.html.twig', {transition_path: 'feed_transition', flowName: 'feed', flowCode: 'feed', entity: feed}) }}
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ feed.id }}</td>
+            </tr>
+            <tr>
+                <th>Url</th>
+                <td>{{ feed.url }}</td>
+            </tr>
+            <tr>
+                <th>EventCount</th>
+                <td>{{ feed.eventCount }}</td>
+            </tr>
+            <tr>
+                <th>Slug</th>
+                <td>{{ feed.slug }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a class="btn btn-primary" href="{{ path('feed_edit', feed.rp) }}">edit</a>
+    {{ include('feed/_delete_form.html.twig') }}
+{% endblock %}

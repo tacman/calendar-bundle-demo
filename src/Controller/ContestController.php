@@ -1,6 +1,5 @@
 <?php
 
-
 // uses Survos Param Converter, from the UniqueIdentifiers method of the entity.
 
 namespace App\Controller;
@@ -8,22 +7,20 @@ namespace App\Controller;
 use App\Entity\Contest;
 use App\Form\ContestType;
 use Doctrine\ORM\EntityManagerInterface;
-use App\Repository\ContestRepository;
 // use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/contest/{contestId}')]
 class ContestController extends AbstractController
 {
+    public function __construct(private EntityManagerInterface $entityManager)
+    {
+    }
 
-public function __construct(private EntityManagerInterface $entityManager) {
-
-}
-
-#[Route('/', name: 'app_contest_show')]
+    #[Route('/', name: 'app_contest_show')]
     public function show(Contest $contest): Response
     {
         return $this->render('contest/show.html.twig', [
@@ -31,7 +28,7 @@ public function __construct(private EntityManagerInterface $entityManager) {
         ]);
     }
 
-#[Route('/edit', name: 'app_contest_edit')]
+    #[Route('/edit', name: 'app_contest_edit')]
     public function edit(Request $request, Contest $contest): Response
     {
         $form = $this->createForm(ContestType::class, $contest);
@@ -49,7 +46,7 @@ public function __construct(private EntityManagerInterface $entityManager) {
         ]);
     }
 
-#[Route('/delete', name: 'app_contest_delete', methods:['DELETE'])]
+    #[Route('/delete', name: 'app_contest_delete', methods: ['DELETE'])]
     public function delete(Request $request, Contest $contest): Response
     {
         // hard-coded to getId, should be get parameter of uniqueIdentifiers()

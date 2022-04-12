@@ -59,7 +59,7 @@ class FeedParamConverter implements ParamConverterInterface
         $repository = $this->registry->getManagerForClass($configuration->getClass())?->getRepository($configuration->getClass());
 
         // Try to find the entity
-        if (!$feed = $repository->findOneBy(['id' => $feedId])) {
+        if (!$feed = $repository->findOneBy(['slug' => $feedId])) {
             throw new NotFoundHttpException(sprintf('%s %s object not found.', $feedId, $configuration->getClass()));
         }
 

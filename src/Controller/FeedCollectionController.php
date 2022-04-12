@@ -4,9 +4,9 @@
 
 namespace App\Controller;
 
-use App\Entity\Contest;
-use App\Form\ContestType;
-use App\Repository\ContestRepository;
+use App\Entity\Feed;
+use App\Form\FeedType;
+use App\Repository\FeedRepository;
 use Doctrine\ORM\EntityManagerInterface;
 // use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -14,40 +14,38 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route("/contest/entity")
- */
-class ContestEntityController extends AbstractController
+#[Route('/feed')]
+class FeedCollectionController extends AbstractController
 {
     public function __construct(private EntityManagerInterface $entityManager)
     {
     }
 
-    #[Route('/', name: 'app_contest_index')]
-    public function index(ContestRepository $contestRepository): Response
+    #[Route('/', name: 'feed_index')]
+    public function index(FeedRepository $feedRepository): Response
     {
-        return $this->render('contest/index.html.twig', [
-            'contests' => $contestRepository->findBy([], [], 30),
+        return $this->render('feed/index.html.twig', [
+            'feeds' => $feedRepository->findBy([], [], 30),
         ]);
     }
 
-    #[Route('app_contest/new', name: 'app_contest_new')]
+    #[Route('feed/new', name: 'feed_new')]
     public function new(Request $request): Response
     {
-        $contest = new Contest();
-        $form = $this->createForm(ContestType::class, $contest);
+        $feed = new Feed();
+        $form = $this->createForm(FeedType::class, $feed);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->entityManager;
-            $entityManager->persist($contest);
+            $entityManager->persist($feed);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_contest_index');
+            return $this->redirectToRoute('feed_index');
         }
 
-        return $this->render('contest/new.html.twig', [
-            'contest' => $contest,
+        return $this->render('feed/new.html.twig', [
+            'feed' => $feed,
             'form' => $form->createView(),
         ]);
     }

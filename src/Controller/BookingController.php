@@ -30,7 +30,8 @@ class BookingController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $bookingRepository->add($booking);
-            return $this->redirectToRoute('booking_index', [], Response::HTTP_SEE_OTHER);
+
+            return $this->redirectToRoute('booking_calendar', ['id' => $booking->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('booking/new.html.twig', [
@@ -44,7 +45,6 @@ class BookingController extends AbstractController
     {
         return $this->render('booking/calendar.html.twig');
     }
-
 
     #[Route('/{id}', name: 'booking_show', methods: ['GET'])]
     public function show(Booking $booking): Response
@@ -62,7 +62,8 @@ class BookingController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $bookingRepository->add($booking);
-            return $this->redirectToRoute('booking_index', [], Response::HTTP_SEE_OTHER);
+
+            return $this->redirectToRoute('booking_calendar', ['id' => $booking->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('booking/edit.html.twig', [

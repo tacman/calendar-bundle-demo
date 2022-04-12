@@ -28,5 +28,4 @@ class AppController extends AbstractController
         return $this->render('app/mmenu_light.html.twig', [
         ]);
     }
-
 }

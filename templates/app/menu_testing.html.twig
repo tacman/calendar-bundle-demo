@@ -1,0 +1,41 @@
+{% set menuCode = 'main' %}
+    {% set menuItem = knp_menu_get(menuCode, [],  {
+        'comment': "This is an option passed in knp_menu_get",
+        'menu_code'     : menuCode,
+    }) %}
+
+    {% set _menu_controller = 'mmenu' %}
+<div {{ stimulus_controller(_menu_controller) }}>
+    <div {{ stimulus_target(_menu_controller, 'msg') }}>Message here.</div>
+    <nav {{ stimulus_target(_menu_controller, 'menu') }}>
+
+        {#                            todo: OptionsResolver for the theme #}
+        {% set menuHtml = knp_menu_render(menuItem, {
+            "template"      : "@SurvosBase/adminlte/knp_menu.html.twig",
+            "debug": debug|default(false),
+            currentAsLink: true,
+            firstClass: 'f',
+            "currentClass"  : "active",
+            "ancestorClass" : "nav-item menu-open",
+            "branch_class"  : "nav-item",
+            'leaf_class'    : 'nav-item leaf',
+            'link_class'    : 'nav-link',
+            "allow_safe_labels": true,
+            'rootAttributes': {
+                id: 'root-element',
+                'class': 'nav nav-pills nav-sidebar flex-column',
+                'data-lte-toggle': 'treeview',
+                'data-accordian': 'false',
+                'role': 'menu'
+            },
+
+            'comment': "This is an option passed in knp_menu_render",
+        })
+        %}
+
+    </nav>
+
+</div>
+
+{{ menuHtml|raw }}
+

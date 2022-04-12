@@ -3,102 +3,112 @@
 
 {% block body %}
 
-    {% set menuCode = 'main' %}
-    {% set menuItem = knp_menu_get(menuCode, [],  {
-        'comment': "This is an option passed in knp_menu_get",
-        'menu_code'     : menuCode,
-    }) %}
-
-    {% set _menu_controller = 'mmenu' %}
-    <div {{ stimulus_controller(_menu_controller) }}>
-        <div {{ stimulus_target(_menu_controller, 'msg') }}>Message here.</div>
-        <nav {{ stimulus_target(_menu_controller, 'menu') }}>
-
-        {#                            todo: OptionsResolver for the theme #}
-        {% set menuHtml = knp_menu_render(menuItem, {
-            "template"      : "@SurvosBase/adminlte/knp_menu.html.twig",
-            "debug": debug|default(false),
-            currentAsLink: true,
-            firstClass: 'f',
-            "currentClass"  : "active",
-            "ancestorClass" : "nav-item menu-open",
-            "branch_class"  : "nav-item",
-            'leaf_class'    : 'nav-item leaf',
-            'link_class'    : 'nav-link',
-            "allow_safe_labels": true,
-            'rootAttributes': {
-                id: 'root-element',
-                'class': 'nav nav-pills nav-sidebar flex-column',
-                'data-lte-toggle': 'treeview',
-                'data-accordian': 'false',
-                'role': 'menu'
-            },
-
-            'comment': "This is an option passed in knp_menu_render",
-        })
-        %}
-
-        </nav>
-
-    </div>
-
-    {{ menuHtml|raw }}
-
-{#    {{ dump(menuHtml) }}#}
-
     <h1>UX Demo</h1>
 
+
     <div>
-        A playground for some UX tools that we use or may use.
+        <div>
+            A playground for some UX tools that we use or may use.
+        </div>
+
+        This is a working example of using <a href="https://github.com/tattali/CalendarBundle">CalendarBundle</a>, which integrates events from a database within a Symfony application with <a href="https://fullcalendar.io/">FullCalendar.io</a>.
     </div>
 
-    This is a working example of using <a href="https://github.com/tattali/CalendarBundle">CalendarBundle</a>, which integrates events from a database within a Symfony application with <a href="https://fullcalendar.io/">FullCalendar.io</a>.
+
+<div class="col-md-6 col-lg-4">
+
+    {% if admin_menu is not defined %}
+    {% set admin_menu = get_menu(admin.menuName()) %}
+    {% endif %}
+{#    {{ render_menu(admin_menu) }}#}
 
 
 
-    {% embed '_partial/card.html.twig' with { links:
-        {
-        'CRUD example documentation' : 'https://github.com/tattali/CalendarBundle/blob/master/src/Resources/doc/doctrine-crud.md'
-        }
-    } %}
-        {% block title 'Basic ' %}
-        {% block subtitle 'Simple Booking Calendar' %}
-        {% block text %}
-            <p>
-                This is <em>almost</em> exactly what is created following the basic Doctrine crud example on the bundle's documentation.
-            </p>
 
-            The exceptions:
-            <ul>
-                <li>The entity uses attributes instead of annotations</li>
-            </ul>
+    {% for child in admin_menu.root.children|filter(c => c.children|length ) %}
+    <div class="col-md-6 col-lg-4">
+        {% embed '_partial/card.html.twig' with {
+        } %}
+            {% block title child.label %}
+            {% block subtitle "%s.subtitle"|format(child.label)|trans|markdown_to_html %}
+            {% block text %}
+                {{  "%s.description"|format(child.label)|trans|markdown_to_html }}
 
-        {% endblock %}
+                <ul class="list-inline">
+                    {% for subMenu in child.children %}
+                        <li class="list-inline-item">
+                            <a class="btn btn-sm btn-primary" href="{{ path(subMenu.route, subMenu.routeParams) }}" class="card-link">{{ subMenu.label|trans }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
 
-    {% endembed %}
+            {% endblock %}
+            {% block footer %}
+                <a href="#" class="card-link">Card link</a>
+
+                Footer
+            {% endblock %}
+
+        {% endembed %}
+    </div>
+
+    {% endfor %}
+
+</div>
+{% endblock %}
 
 
-    <p>
-        A challenge of any demo site is how to present something attractive without complicating the code with the theme.  For this application, I did the following:
-    </p>
-    <ol>
-        <li>Create the project with symfony: <code>symfony new --webapp calendar-bundle-demo</code>
-        </li>
-        <li>
-            Add umbrella admin: <code>composer require umbrella2/adminbundle</code>
-            and configure the menu.
-        </li>
-        <li>
-            Install <a href="https://github.com/tattali/CalendarBundle">tattali/CalendarBundle</a>, and create the Booking.php entity, then create CRUD using <code>bin/console make:crud Booking</code>
-        </li>
-        <li>
-            Change <code>base.html.twig</code> to extend the umbrella base, and add the sidebar.
-        </li>
-        <li>
-            Change the <b>body</b> block to <b>content</b>, since that's what admin bundle uses.
-        </li>
-    </ol>
+{% block card_with_tabs %}
+<div class="col-md-6 col-lg-4">
+    <!-- Cards with tabs component -->
+    <div class="card-tabs ">
+        <!-- Cards navigation -->
+        <ul class="nav nav-tabs">
+            <li class="nav-item"><a href="#tab-top-1" class="nav-link" data-bs-toggle="tab">Tab 1</a></li>
+            <li class="nav-item"><a href="#tab-top-2" class="nav-link" data-bs-toggle="tab">Tab 2</a></li>
+            <li class="nav-item"><a href="#tab-top-3" class="nav-link active" data-bs-toggle="tab">Tab 3</a></li>
+            <li class="nav-item"><a href="#tab-top-4" class="nav-link" data-bs-toggle="tab">Tab 4</a></li>
+        </ul>
+        <div class="tab-content">
+            <!-- Content of card #1 -->
+            <div id="tab-top-1" class="card tab-pane show">
+                <div class="card-body">
+                    <div class="card-title">Content of tab #1</div>
+                    <p class="text-muted">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci, alias aliquid distinctio dolorem expedita, fugiat hic magni molestiae molestias odit.
+                    </p>
+                </div>
+            </div>
+            <!-- Content of card #2 -->
+            <div id="tab-top-2" class="card tab-pane">
+                <div class="card-body">
+                    <div class="card-title">Content of tab #2</div>
+                    <p class="text-muted">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci, alias aliquid distinctio dolorem expedita, fugiat hic magni molestiae molestias odit.
+                    </p>
+                </div>
+            </div>
+            <!-- Content of card #3 -->
+            <div id="tab-top-3" class="card tab-pane active">
+                <div class="card-body">
+                    <div class="card-title">Content of tab #3</div>
+                    <p class="text-muted">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci, alias aliquid distinctio dolorem expedita, fugiat hic magni molestiae molestias odit.
+                    </p>
+                </div>
+            </div>
+            <!-- Content of card #4 -->
+            <div id="tab-top-4" class="card tab-pane">
+                <div class="card-body">
+                    <div class="card-title">Content of tab #4</div>
+                    <p class="text-muted">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci, alias aliquid distinctio dolorem expedita, fugiat hic magni molestiae molestias odit.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-    <span class="fas fa-github"></span> Github
 
 {% endblock %}

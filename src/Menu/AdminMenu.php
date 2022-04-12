@@ -18,14 +18,12 @@ class AdminMenu extends BaseAdminMenu
     {
         $root = $builder->root();
 
-        $this->addMenuItem($root, ['route' => 'booking_index']);
-        $this->addMenuItem($root, ['route' => 'feed_index']);
-        $this->addMenuItem($root, ['route' => 'feed_new']);
-
+//        $this->addMenuItem($root, ['route' => 'feed_index']);
+//        $this->addMenuItem($root, ['route' => 'feed_new']);
 
 
         // Create a new entry with route
-        $root->add('welcome')
+        $root->add('home')
             ->icon('uil-home') // Icon of entry
             ->route('app_homepage'); // Route of entry
 
@@ -42,8 +40,13 @@ class AdminMenu extends BaseAdminMenu
             ->end()
             ->add('new')->route('booking_new')->end()
             ->add('view')->route('booking_calendar')->end()
-
         ;
+
+        $root->add('feed')->label('iCal Feeds')
+            ->add('List')->route('feed_index')->label('Browse')->end()
+            ->add('new')->route('feed_new')->label('New Feed')->end()
+//            ->add('view')->route('feed_calendar')->end()
+            ;
 
         // Create a nested entry
         $root->add('Stimulus')
@@ -53,13 +56,11 @@ class AdminMenu extends BaseAdminMenu
 
         ;
 
-        // Create a nested entry
-        $root->add('Menu')
-            ->icon('uil-apps')
-            ->route('app_menu')
-            ->end()
-
-        ;
+//        $root->add('Menu')
+//            ->icon('uil-apps')
+//            ->route('app_menu')
+//            ->end()
+//        ;
 
     }
 
