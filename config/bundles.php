@@ -27,4 +27,5 @@ return [
     Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle::class => ['all' => true],
     Umbrella\AdminBundle\UmbrellaAdminBundle::class => ['all' => true],
     Survos\WorkflowBundle\SurvosWorkflowBundle::class => ['all' => true],
+    Jsvrcek\Bundle\IcsBundle\JsvrcekIcsBundle::class => ['all' => true],
 ];

@@ -15,10 +15,17 @@ Individuals can also belong to calendars, including private ones if given permis
 * Individuals can
   * Subscribe to iCal feeds, either in their ccal account or Google account
 
-
+## 
 
 ## Sample feeds
 
 * http://www.mysportscal.com/download-major-league-schedules/mlb/
 * https://www.officeholidays.com/subscribe/usa
+
+## Tools
+
+in use: https://github.com/Graceas/php-ics-reader
+maybe:https://github.com/u01jmg3/ics-parser
+
+to write iCS:
 

@@ -13,8 +13,6 @@ class AppFixtures extends Fixture
     {
         ContestFactory::new()->createMany(20);
         BookingFactory::new()->createMany(20);
-
-
         $manager->flush();
     }
 }

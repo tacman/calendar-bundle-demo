@@ -157,6 +157,12 @@
     "guzzlehttp/psr7": {
         "version": "2.2.1"
     },
+    "jsvrcek/ics": {
+        "version": "0.8.3"
+    },
+    "jsvrcek/ics-bundle": {
+        "version": "0.1"
+    },
     "kevinpapst/tabler-bundle": {
         "version": "0.3"
     },
@@ -207,6 +213,9 @@
         "files": [
             "config/packages/nelmio_cors.yaml"
         ]
+    },
+    "nesbot/carbon": {
+        "version": "2.57.0"
     },
     "nette/schema": {
         "version": "v1.2.2"
@@ -273,6 +282,12 @@
         "files": [
             "config/packages/sensio_framework_extra.yaml"
         ]
+    },
+    "spatie/enum": {
+        "version": "3.12.0"
+    },
+    "spatie/icalendar-generator": {
+        "version": "2.3.3"
     },
     "stof/doctrine-extensions-bundle": {
         "version": "1.7",
