@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Repository\EventRepository;
+use Jsvrcek\ICS\CalendarExport;
+use Jsvrcek\ICS\Utility\Formatter;
 use Spatie\IcalendarGenerator\Components\Calendar;
 use Spatie\IcalendarGenerator\Components\Event;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
