@@ -24,7 +24,7 @@
 
             <td>{{ feed.id }}</td>
             <td>{{ feed.url }}</td>
-            <td>{{ feed.eventCount }}</td>
+            <td>{{ feed.bookings.count }}</td>
             <td><a href="{{ path('feed_show', feed.rP) }}">
                     {{ feed.slug }}
                 </a>

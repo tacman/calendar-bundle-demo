@@ -65,7 +65,7 @@ class Feed extends SurvosBaseEntity implements MarkingInterface
     #[ORM\Column(type: 'text', nullable: true)]
     private $content;
 
-    #[ORM\OneToMany(mappedBy: 'feed', targetEntity: Booking::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'feed', targetEntity: Booking::class, orphanRemoval: true, cascade: ['persist'])]
     private $bookings;
 
     /**

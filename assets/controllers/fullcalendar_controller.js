@@ -28,11 +28,13 @@ export default class extends Controller {
         console.log('hello from ' + this.identifier + ' ' + this.urlValue);
         // this.demo(this.calendarTarget);
         this.parseIcsCalendar(this.calendarTarget);
+        let self = this;
 
     }
 
     openModal(e) {
-        console.error('yay, open modal!', e, e.currentTarget, e.currentTarget.dataset);
+        console.log(e, e.event);
+        // console.error('yay, open modal!', e, e.currentTarget, e.currentTarget.dataset);
 
         // this.modalTarget.addEventListener('show.bs.modal',  (e) => {
         //     console.log(e, e.relatedTarget, e.currentTarget);
@@ -70,6 +72,16 @@ export default class extends Controller {
                 center: 'title',
                 right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
             },
+            eventClick: (info) => {
+
+                console.log('Event: ' + info.event.title);
+                console.log('Coordinates: ' + info.jsEvent.pageX + ',' + info.jsEvent.pageY);
+                console.log('View: ' + info.view.type);
+                // change the border color just for fun
+                info.el.style.borderColor = 'red';
+                this.openModal(info)
+            },
+
             // initialDate: '2018-01-12',
             navLinks: true, // can click day/week names to navigate views
             editable: true,
@@ -93,36 +105,7 @@ export default class extends Controller {
 
     }
 
-    demo(calendarEl)
-    {
 
-            var calendar = new Calendar(calendarEl, {
-                plugins: [ interactionPlugin, dayGridPlugin, timeGridPlugin, listPlugin ],
-                // plugins: [ dayGridPlugin ],
-                headerToolbar: {
-                    left: 'prev,next today',
-                    center: 'title',
-                    right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
-                },
-                initialDate: '2018-01-12',
-                navLinks: true, // can click day/week names to navigate views
-                editable: true,
-                dayMaxEvents: true, // allow "more" link when too many events
-                events: [
-                    {
-                        title: 'All Day Event',
-                        start: '2018-01-01',
-                    },
-                    {
-                        title: 'Click for Google',
-                        url: 'http://google.com/',
-                        start: '2018-01-28'
-                    }
-                ]
-            });
-
-            calendar.render();
-    }
 
 }
 
