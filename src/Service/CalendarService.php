@@ -2,6 +2,10 @@
 
 namespace App\Service;
 
+use App\Entity\Booking;
+use App\Entity\Feed;
+use Carbon\Carbon;
+use ICal\ICal;
 use IcsReader\IcsReader;
 use League\Csv\Reader;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
@@ -34,6 +38,35 @@ class CalendarService
             dd($row);
             var_dump($row);
         }
+    }
+
+    public function parseUsingIcal(Feed $feed): Feed
+    {
+            $ical = new ICal($feed->getUrl(), array(
+                'defaultSpan'                 => 2,     // Default value
+                'defaultTimeZone'             => 'UTC',
+                'defaultWeekStart'            => 'MO',  // Default value
+                'disableCharacterReplacement' => false, // Default value
+                'filterDaysAfter'             => null,  // Default value
+                'filterDaysBefore'            => null,  // Default value
+                'skipRecurrence'              => false, // Default value
+            ));
+            // $ical->initFile('ICal.ics');
+            // $ical->initUrl('https://raw.githubusercontent.com/u01jmg3/ics-parser/master/examples/ICal.ics', $username = null, $password = null, $userAgent = null);
+        try {
+        } catch (\Exception $e) {
+            die($e);
+        }
+        foreach ($ical->events() as $icalEvent) {
+            $booking = (new Booking())
+                ->setTitle($icalEvent->summary)
+                ->setBeginAt(Carbon::parse($icalEvent->dtstart))
+            ;
+//            dd($icalEvent, $booking);
+            $feed->addBooking($booking);
+        }
+        return $feed;
+
     }
 
     public function parseIcs($icsContent)

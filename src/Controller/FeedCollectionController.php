@@ -41,7 +41,7 @@ class FeedCollectionController extends AbstractController
             $entityManager->persist($feed);
             $entityManager->flush();
 
-            return $this->redirectToRoute('feed_index');
+            return $this->redirectToRoute('feed_show', $feed->getRP());
         }
 
         return $this->render('feed/new.html.twig', [

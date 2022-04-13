@@ -29,3 +29,7 @@ maybe:https://github.com/u01jmg3/ics-parser
 
 to write iCS:
 
+https://github.com/jasvrcek/ICS and https://github.com/jasvrcek/IcsBundle
+https://github.com/spatie/icalendar-generator
+
+

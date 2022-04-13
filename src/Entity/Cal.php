@@ -7,6 +7,7 @@ use App\Repository\CalRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CalRepository::class)]
+#[ORM\Table('calendar')]
 #[ApiResource]
 class Cal
 {

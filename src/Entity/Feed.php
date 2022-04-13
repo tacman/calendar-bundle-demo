@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\FeedRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Survos\BaseBundle\Entity\SurvosBaseEntity;
@@ -12,12 +14,13 @@ use Survos\WorkflowBundle\Traits\MarkingTrait;
 #[ORM\Entity(repositoryClass: FeedRepository::class)]
 class Feed extends SurvosBaseEntity implements MarkingInterface
 {
-    const WORKFLOW = 'feed';
     use MarkingTrait;
+
+    const WORKFLOW = 'feed';
     const ICON = 'fas fa-chart-column';
 
     const PLACE_NEW = 'new';
-    const PLACE_BILLS_FETCHED = 'bills_fetched';
+    const PLACE_ICS_FETCHED = 'ics_fetched';
     const PLACE_AUTO = 'auto'; // can be configured.
     const PLACE_MANUAL = 'manual'; // can be configured.
     const PLACE_ARCHIVED = 'archived';
@@ -25,15 +28,13 @@ class Feed extends SurvosBaseEntity implements MarkingInterface
     const TRANSITION_AUTO= 'auto';
     const TRANSITION_MANUAL= 'manual';
 
-    const TRANSITION_TRACK_BILLS = 'select_bills';
-    const TRANSITION_SCORE_ACTIONS = 'select_actions';
-    const TRANSITION_FETCH_BILLS = 'fetch_bills';
-    const TRANSITION_LEGISLATORS = 'fetch_legislators';
+    const TRANSITION_FETCH = 'fetch_ics';
     const TRANSITION_ARCHIVE = 'archive';
 
     public function __construct()
     {
         $this->marking = self::PLACE_NEW;
+        $this->bookings = new ArrayCollection();
     }
 
     #[ORM\Id]
@@ -63,6 +64,9 @@ class Feed extends SurvosBaseEntity implements MarkingInterface
 
     #[ORM\Column(type: 'text', nullable: true)]
     private $content;
+
+    #[ORM\OneToMany(mappedBy: 'feed', targetEntity: Booking::class, orphanRemoval: true)]
+    private $bookings;
 
     /**
      * @return string
@@ -115,6 +119,36 @@ class Feed extends SurvosBaseEntity implements MarkingInterface
     public function setContent(?string $content): self
     {
         $this->content = $content;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Booking>
+     */
+    public function getBookings(): Collection
+    {
+        return $this->bookings;
+    }
+
+    public function addBooking(Booking $booking): self
+    {
+        if (!$this->bookings->contains($booking)) {
+            $this->bookings[] = $booking;
+            $booking->setFeed($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBooking(Booking $booking): self
+    {
+        if ($this->bookings->removeElement($booking)) {
+            // set the owning side to null (unless already changed)
+            if ($booking->getFeed() === $this) {
+                $booking->setFeed(null);
+            }
+        }
 
         return $this;
     }

@@ -29,16 +29,22 @@ class FeedController extends AbstractController
     public function feed_transition(Request $request, Feed $feed, WorkflowInterface $feedStateMachine, ?string $transition=null, $_format = 'json')
     {
         // if there's no transition, it's because it's part of a form
-        if (empty($transition)) {
+        if (empty($transition) || $transition == '_') {
             $transition = $request->request->get('transition');
         }
-        return $this->_transition($request, $feed, $transition, $feedStateMachine, $this->entityManager, Feed::class, $_format);
+        $jsonResponse = $this->_transition($request, $feed, $transition, $feedStateMachine, $this->entityManager, Feed::class, $_format);
+        if ($_format === 'json') {
+            return $jsonResponse;
+        } else {
+            return $this->redirectToRoute('feed_show', $feed->getRP());
+        }
 
     }
 
     #[Route('/', name: 'feed_show')]
     public function show(Feed $feed): Response
     {
+        ray( $feed);
         return $this->render('feed/show.html.twig', [
             'feed' => $feed,
         ]);

@@ -22,22 +22,9 @@ return static function (FrameworkConfig $framework) {
     $feedTracking->place()->name(Feed::PLACE_ARCHIVED);
 
     $feedTracking->transition()
-        ->name(Feed::TRANSITION_FETCH_BILLS)
-        ->from([Feed::PLACE_NEW, Feed::PLACE_AUTO])
+        ->name(Feed::TRANSITION_FETCH)
+        ->from([Feed::PLACE_NEW, Feed::PLACE_MANUAL, Feed::PLACE_AUTO])
         ->to([Feed::PLACE_AUTO]);
-
-    $feedTracking->transition()
-        ->name(Feed::TRANSITION_TRACK_BILLS)
-        ->from([Feed::PLACE_MANUAL])
-        ->to([Feed::PLACE_MANUAL]);
-
-    $feedTracking->transition()
-        ->name(Feed::TRANSITION_SCORE_ACTIONS)
-        ->metadata([
-            'label' => 'Score a action'
-        ])
-        ->from([Feed::PLACE_MANUAL])
-        ->to([Feed::PLACE_MANUAL]);
 
     $feedTracking->transition()
         ->name(Feed::TRANSITION_AUTO)

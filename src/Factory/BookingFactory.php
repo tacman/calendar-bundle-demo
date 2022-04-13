@@ -39,6 +39,7 @@ final class BookingFactory extends ModelFactory
     {
         return [
             'title' => self::faker()->text(),
+//            'askedAt' => rand(1, 10) > 2 ? self::faker()->dateTimeBetween('-100 days', '-1 days') : null,
             'beginAt' => self::faker()->dateTimeBetween('-30 days', '+30 days'),
             'durationInMinutes' => 30 * random_int(0, 6)
         ];

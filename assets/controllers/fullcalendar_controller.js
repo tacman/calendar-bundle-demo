@@ -1,9 +1,15 @@
 import { Controller } from '@hotwired/stimulus';
 
-import { Calendar } from '@fullcalendar/core'
-import dayGridPlugin from '@fullcalendar/daygrid'
-import timeGridPlugin from '@fullcalendar/timegrid'
-import interactionPlugin from '@fullcalendar/interaction'
+import { Calendar } from '@fullcalendar/core';
+import iCalendarPlugin from '@fullcalendar/icalendar'
+import interactionPlugin from '@fullcalendar/interaction';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import timeGridPlugin from '@fullcalendar/timegrid';
+import listPlugin from '@fullcalendar/list';
+// import './main.css';
+
+// es module import:
+import { ray } from 'node-ray/web';
 
 // https://stackoverflow.com/questions/68084742/dropdown-doesnt-work-after-modal-of-bootstrap-imported
 import Modal from 'bootstrap/js/dist/modal';
@@ -13,19 +19,15 @@ export default class extends Controller {
     static targets = ["calendar", "modalBody", "modal"]
     static values = {
         url: String,
+        icsUrl: { type: String, default: '' },
+        format: { type: String, default: 'json' }
     }
 
     connect() {
-        console.log(this.baseUrlValue);
-        this.invokeCalendar(this.calendarTarget);
-        this.calendarTarget.innerHTML = this.baseUrlValue;
-        // compile the lodash template
-        // this.resourceTemplate = template(this.resourceTemplateTarget.textContent);
-        // this.optionTargets.forEach((el, i) => {
-        //     if (el.checked) {
-        //         this.loadBranch(el.value)
-        //     }
-        // });
+
+        console.log('hello from ' + this.identifier + ' ' + this.urlValue);
+        // this.demo(this.calendarTarget);
+        this.parseIcsCalendar(this.calendarTarget);
 
     }
 
@@ -40,122 +42,86 @@ export default class extends Controller {
         this.modal = new Modal(this.modalTarget);
         console.log(this.modal);
         this.modal.show();
-
     }
 
-
-    invokeCalendar(el) {
-
-
-        let _this = this;
-
-        let calendar = new Calendar(el, {
-
-            defaultView: 'dayGridMonth',
-            // events: '/admin/events.json',
-            eventSources: [
-                {
-                    url: this.urlValue,
-                    method: "POST",
-                    extraParams: {
-                        filters: JSON.stringify({})
-                    },
-                    failure: () => {
-                        // alert("There was an error while fetching FullCalendar!");
-                    },
+    parseIcsCalendar(calendarEl)
+    {
+        let eventSources = [
+            {
+                url: this.urlValue,
+                // method: "POST",
+                extraParams: {
+                    anExtraParam: 'url for example',
+                    filters: JSON.stringify({
+                        'icsUrl' : this.icsUrlValue,
+                    })
                 },
-            ],
-            header: {
+                failure: (e) => {
+                    console.error(e);
+                },
+            },
+        ];
+        console.log(eventSources);
+
+        var calendar = new Calendar(calendarEl, {
+            plugins: [ interactionPlugin, dayGridPlugin, timeGridPlugin, listPlugin ],
+            headerToolbar: {
                 left: 'prev,next today',
                 center: 'title',
-                right: 'dayGridMonth,timeGridWeek,timeGridDay',
+                right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
             },
-            timeZone: 'UTC',
-
+            // initialDate: '2018-01-12',
+            navLinks: true, // can click day/week names to navigate views
             editable: true,
-            selectable: true,
-            navLinks: true,
-            nowIndicator: true,
-            headerToolbar: { center: 'dayGridMonth,timeGridWeek,timeGridDay' },
-            plugins: [dayGridPlugin,timeGridPlugin,interactionPlugin],
-            // plugins: [ 'interaction', 'dayGrid', 'timeGrid' ], // https://fullcalendar.io/docs/plugin-index
-
-            // this navigates to the day selected from month view -> day view
-            navLinkDayClick: function(date, jsEvent) {
-                calendar.changeView('timeGridDay', date);
-            },
-
-            // This method fires when we select a time slot, or range of slots.
-            select: (info) => {
-                console.log(info);
-                this.openModal(info.jsEvent);
-                //
-                // _this.modalTarget.classList.add('active')
-                // _this.start_timeTarget.value = info.start
-                // _this.end_timeTarget.value = info.end
-                //
-                // if (info.allDay = true) {
-                //     _this.allDayTarget.setAttribute('checked', true)
-                // }
-
-            },
-
-            eventDrop: function (info) {
-                let data = _this.data(info)
-                Rails.ajax({
-                    type: 'PUT',
-                    url: info.event.url,
-                    data: new URLSearchParams(data).toString()
-                })
-            },
-
-            eventResize: function (info) {
-                let data = _this.data(info)
-
-                Rails.ajax({
-                    type: 'Put',
-                    url: info.event.url,
-                    data: new URLSearchParams(data).toString()
-                })
-            },
-
-            addEvent: function(info) {
-                _this.addEvent( info )
-            }
-
-        })
-        calendar.render()
-    }
-
-
-    selectBranch(event) {
-        console.log(event);
-        this.loadBranch(event.srcElement.value);
-    }
-
-    loadBranch(branch) {
-        this.branchTarget.innerHTML = branch;
-        this.commitsTarget.innerHTML = `<li>Loading comits for ${branch}</li>`
-        var url = this.baseUrlValue + branch;
-        this.debugTarget.innerHTML = url;
-        this.debugTarget.href = url;
-        fetch(url)
-            .then( data => {
-                if (!data.ok) {
-                    throw Error(data.statusText);
-                }
-                return data.json();
-            }).then( commits => {
-            this.commitsTarget.innerHTML = this.resourceTemplate({commits: commits});
-        }).catch((error) => {
-            this.messagesTarget.innerHTML = error.toString();
-            console.error('Error:', error);
+            dayMaxEvents: true, // allow "more" link when too many events
+            // events: [
+            //     {
+            //         title: 'All Day Event',
+            //         start: '2018-01-01',
+            //     },
+            //     {
+            //         title: 'Click for Google',
+            //         url: 'http://google.com/',
+            //         start: '2018-01-28'
+            //     }
+            // ],
+            //
+            eventSources: eventSources,
+            timeZone: 'UTC',
         });
+        calendar.render();
+
     }
 
-    formatDate(v) {
-        console.log(v);
-        return v.replace(/T|Z/g, ' ')
+    demo(calendarEl)
+    {
+
+            var calendar = new Calendar(calendarEl, {
+                plugins: [ interactionPlugin, dayGridPlugin, timeGridPlugin, listPlugin ],
+                // plugins: [ dayGridPlugin ],
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+                },
+                initialDate: '2018-01-12',
+                navLinks: true, // can click day/week names to navigate views
+                editable: true,
+                dayMaxEvents: true, // allow "more" link when too many events
+                events: [
+                    {
+                        title: 'All Day Event',
+                        start: '2018-01-01',
+                    },
+                    {
+                        title: 'Click for Google',
+                        url: 'http://google.com/',
+                        start: '2018-01-28'
+                    }
+                ]
+            });
+
+            calendar.render();
     }
 
 }

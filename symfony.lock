@@ -16,6 +16,9 @@
     "behat/transliterator": {
         "version": "v1.3.0"
     },
+    "brick/math": {
+        "version": "0.9.3"
+    },
     "composer/pcre": {
         "version": "3.0.0"
     },
@@ -157,6 +160,9 @@
     "guzzlehttp/psr7": {
         "version": "2.2.1"
     },
+    "johngrogg/ics-parser": {
+        "version": "v3.1.1"
+    },
     "jsvrcek/ics": {
         "version": "0.8.3"
     },
@@ -271,6 +277,12 @@
     "ralouphie/getallheaders": {
         "version": "3.0.3"
     },
+    "ramsey/collection": {
+        "version": "1.2.2"
+    },
+    "ramsey/uuid": {
+        "version": "4.3.1"
+    },
     "sensio/framework-extra-bundle": {
         "version": "6.2",
         "recipe": {
@@ -283,11 +295,20 @@
             "config/packages/sensio_framework_extra.yaml"
         ]
     },
+    "spatie/backtrace": {
+        "version": "1.2.1"
+    },
     "spatie/enum": {
         "version": "3.12.0"
     },
     "spatie/icalendar-generator": {
         "version": "2.3.3"
+    },
+    "spatie/macroable": {
+        "version": "2.0.0"
+    },
+    "spatie/ray": {
+        "version": "1.34.2"
     },
     "stof/doctrine-extensions-bundle": {
         "version": "1.7",

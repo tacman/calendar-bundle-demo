@@ -27,6 +27,10 @@ class Booking
     #[ORM\Column(type: 'integer', nullable: true)]
     private $durationInMinutes;
 
+    #[ORM\ManyToOne(targetEntity: Feed::class, inversedBy: 'bookings')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $feed;
+
     public function __construct()
     {
         $this->beginAt = new \DateTime();
@@ -96,6 +100,18 @@ class Booking
 //            $this->setEndAt(\DateTime::createFromImmutable($endAt));
             assert($this->getEndAt() <> $this->getBeginAt(), $format);
         }
+
+        return $this;
+    }
+
+    public function getFeed(): ?Feed
+    {
+        return $this->feed;
+    }
+
+    public function setFeed(?Feed $feed): self
+    {
+        $this->feed = $feed;
 
         return $this;
     }
