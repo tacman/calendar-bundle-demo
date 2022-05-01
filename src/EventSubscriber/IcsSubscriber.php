@@ -48,7 +48,7 @@ class IcsSubscriber implements EventSubscriberInterface
         $this->calendarService->parseUsingIcal($feed);
 
 //        dd($feed->getBookings()->count());
-////            $icsCalendar = $this->calendarService->loadByUrl($icsUrl);
+//            $icsCalendar = $this->calendarService->loadByUrl($icsUrl);
 //        dd($ical->getBookings());
 //
 //        try {

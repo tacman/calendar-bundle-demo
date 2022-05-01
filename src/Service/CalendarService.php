@@ -72,10 +72,11 @@ class CalendarService
     public function parseIcs($icsContent)
     {
         $reader = new IcsReader();
-        return $reader->parse($icsContent);
+        $ics = $reader->parse($icsContent);
 
-        print_r($ics->getCalendar());
-        print_r($ics->getEvents());
+        dump($ics->getCalendar());
+        dd($ics->getEvents());
+        return $ics;
 
     }
 

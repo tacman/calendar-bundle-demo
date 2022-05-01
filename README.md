@@ -24,8 +24,8 @@ Individuals can also belong to calendars, including private ones if given permis
 
 ## Tools
 
-in use: https://github.com/Graceas/php-ics-reader
-maybe:https://github.com/u01jmg3/ics-parser
+old: https://github.com/Graceas/php-ics-reader
+in use: https://github.com/u01jmg3/ics-parser
 
 to write iCS:
 

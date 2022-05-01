@@ -28,4 +28,5 @@ return [
     Umbrella\AdminBundle\UmbrellaAdminBundle::class => ['all' => true],
     Survos\WorkflowBundle\SurvosWorkflowBundle::class => ['all' => true],
     Jsvrcek\Bundle\IcsBundle\JsvrcekIcsBundle::class => ['all' => true],
+    Dunglas\DoctrineJsonOdm\Bundle\DunglasDoctrineJsonOdmBundle::class => ['all' => true],
 ];
