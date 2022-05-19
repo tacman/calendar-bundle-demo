@@ -22,7 +22,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
     normalizationContext: ['groups' => ['Default', 'minimum', 'marking', 'browse', 'transitions', 'rp']],
     denormalizationContext: ['groups' => ["Default", "minimum", "browse"]],
 )]
-#[ApiFilter(OrderFilter::class, properties: ['marking', 'name'], arguments: ['orderParameterName' => 'order'])]
+#[ApiFilter(OrderFilter::class, properties: ['marking', 'name', 'calCount'], arguments: ['orderParameterName' => 'order'])]
 #[ApiFilter(SearchFilter::class, properties: ["marking" => "exact", 'ownerType' => 'exact', 'fullName' => 'partial', 'forkedFromId' => 'exact', 'isZip' => 'exact'])]
 #[ApiFilter(MultiFieldSearchFilter::class, properties: ['fullName', 'shortName'], arguments: ["searchParameterName" => "search"])]
 
@@ -50,6 +50,7 @@ class Org extends SurvosBaseEntity implements MarkingInterface
     private $calendars;
 
     #[ORM\Column(type: 'integer')]
+    #[Groups(['minimum', 'search'])]
     private $calCount;
 
     public function __construct()
@@ -130,5 +131,11 @@ class Org extends SurvosBaseEntity implements MarkingInterface
         $this->calCount = $calCount;
 
         return $this;
+    }
+
+    #[Groups(['rp'])]
+    public function getUniqueIdentifiers(): array
+    {
+        return ['orgId' => $this->getSlug()];
     }
 }

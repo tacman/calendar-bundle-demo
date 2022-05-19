@@ -13,7 +13,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Workflow\WorkflowInterface;
 
 #[Route('/org/{orgId}')]
-class OrgController
+class OrgController extends AbstractController
 {
 
     public function __construct(private EntityManagerInterface $entityManager)

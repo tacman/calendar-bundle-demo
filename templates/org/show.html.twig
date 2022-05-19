@@ -1,7 +1,8 @@
 {% extends "org/base.html.twig" %}
 
 {% block body %}
-    <h1>Org</h1>
+    <h1>Org: {{ org }}</h1>
+
 
     <table class="table">
         <tbody>
@@ -16,6 +17,10 @@
             <tr>
                 <th>Slug</th>
                 <td>{{ org.slug }}</td>
+            </tr>
+            <tr>
+                <th>CalCount</th>
+                <td>{{ org.calCount }}</td>
             </tr>
         </tbody>
     </table>

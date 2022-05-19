@@ -59,7 +59,7 @@ class OrgParamConverter implements ParamConverterInterface
         $repository = $this->registry->getManagerForClass($configuration->getClass())?->getRepository($configuration->getClass());
 
         // Try to find the entity
-        if (!$org = $repository->findOneBy(['id' => $orgId])) {
+        if (!$org = $repository->findOneBy(['slug' => $orgId])) {
             throw new NotFoundHttpException(sprintf('%s %s object not found.', $orgId, $configuration->getClass()));
         }
 
