@@ -7,6 +7,7 @@ use App\Entity\Feed;
 use App\Factory\BookingFactory;
 use App\Factory\CalFactory;
 use App\Factory\ContestFactory;
+use App\Factory\EventFactory;
 use App\Factory\FeedFactory;
 use App\Factory\OrgFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -19,9 +20,15 @@ class AppFixtures extends Fixture
 //        ContestFactory::new()->createMany(20);
         OrgFactory::new()->createMany(20);
         CalFactory::createMany(
-            80,
+            40,
             function() {
                 return ['org' => OrgFactory::random()];
+            }
+        );
+        EventFactory::createMany(
+            80,
+            function() {
+                return ['cal' => CalFactory::random()];
             }
         );
 

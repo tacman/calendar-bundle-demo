@@ -42,5 +42,10 @@ https://github.com/spatie/icalendar-generator
 
 (funky DI)
 https://github.com/jasvrcek/ICS and https://github.com/jasvrcek/IcsBundle
+"jsvrcek/ics-bundle": "dev-tac",
+"ics_bundle": {
+"type": "vcs",
+"url": "git@github.com:tacman/IcsBundle.git"
+},
 
 

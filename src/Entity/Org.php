@@ -49,10 +49,14 @@ class Org extends SurvosBaseEntity implements MarkingInterface
     #[ORM\OneToMany(mappedBy: 'org', targetEntity: Cal::class, orphanRemoval: true)]
     private $calendars;
 
+    #[ORM\Column(type: 'integer')]
+    private $calCount;
+
     public function __construct()
     {
         $this->calendars = new ArrayCollection();
         $this->marking = self::PLACE_NEW;
+        $this->calCount = 0;
     }
 
     public function getId(): ?int
@@ -97,6 +101,7 @@ class Org extends SurvosBaseEntity implements MarkingInterface
         if (!$this->calendars->contains($calendar)) {
             $this->calendars[] = $calendar;
             $calendar->setOrg($this);
+            $this->calCount++;
         }
 
         return $this;
@@ -105,11 +110,24 @@ class Org extends SurvosBaseEntity implements MarkingInterface
     public function removeCalendar(Cal $calendar): self
     {
         if ($this->calendars->removeElement($calendar)) {
+            $this->calCount--;
             // set the owning side to null (unless already changed)
             if ($calendar->getOrg() === $this) {
                 $calendar->setOrg(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCalCount(): ?int
+    {
+        return $this->calCount;
+    }
+
+    public function setCalCount(int $calCount): self
+    {
+        $this->calCount = $calCount;
 
         return $this;
     }

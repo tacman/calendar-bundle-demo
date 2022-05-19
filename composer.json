@@ -17,7 +17,6 @@
         "gedmo/doctrine-extensions": "^3.7",
         "graceas/php-ics-reader": "^1.1",
         "johngrogg/ics-parser": "^3.1",
-        "jsvrcek/ics-bundle": "dev-tac",
         "kevinpapst/tabler-bundle": "dev-tac",
         "knplabs/knp-menu-bundle": "^3.2",
         "league/commonmark": "^2.2",
@@ -132,10 +131,6 @@
         "zenstruck/foundry": "^1.17"
     },
     "repositories": {
-        "ics_bundle": {
-            "type": "vcs",
-            "url": "git@github.com:tacman/IcsBundle.git"
-        },
         "survosworkflow": {
             "type": "path",
             "url": "../../bundles/WorkflowBundle"

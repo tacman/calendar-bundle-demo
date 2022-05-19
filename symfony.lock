@@ -184,12 +184,6 @@
     "johngrogg/ics-parser": {
         "version": "v3.1.1"
     },
-    "jsvrcek/ics": {
-        "version": "0.8.3"
-    },
-    "jsvrcek/ics-bundle": {
-        "version": "0.1"
-    },
     "kevinpapst/tabler-bundle": {
         "version": "0.3"
     },

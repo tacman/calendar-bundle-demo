@@ -8,6 +8,8 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use App\Api\Filter\MultiFieldSearchFilter;
 use App\Repository\CalRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Survos\BaseBundle\Entity\SurvosBaseEntity;
 use Survos\WorkflowBundle\Traits\MarkingInterface;
@@ -42,6 +44,19 @@ class Cal extends SurvosBaseEntity implements MarkingInterface
     #[ORM\ManyToOne(targetEntity: Org::class, inversedBy: 'calendars')]
     #[ORM\JoinColumn(nullable: false)]
     private $org;
+
+    #[ORM\OneToMany(mappedBy: 'cal', targetEntity: Event::class, orphanRemoval: true)]
+    private $events;
+
+    #[ORM\Column(type: 'integer')]
+    private $eventCount;
+
+    public function __construct()
+    {
+        $this->events = new ArrayCollection();
+        $this->marking = self::PLACE_NEW;
+        $this->eventCount = 0;
+    }
 
     public function getId(): ?int
     {
@@ -80,6 +95,50 @@ class Cal extends SurvosBaseEntity implements MarkingInterface
     public function setOrg(?Org $org): self
     {
         $this->org = $org;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Event>
+     */
+    public function getEvents(): Collection
+    {
+        return $this->events;
+    }
+
+    public function addEvent(Event $event): self
+    {
+        if (!$this->events->contains($event)) {
+            $this->events[] = $event;
+            $event->setCal($this);
+            $this->eventCount++;
+        }
+
+        return $this;
+    }
+
+    public function removeEvent(Event $event): self
+    {
+        if ($this->events->removeElement($event)) {
+            // set the owning side to null (unless already changed)
+            if ($event->getCal() === $this) {
+                $event->setCal(null);
+            }
+            $this->eventCount--;
+        }
+
+        return $this;
+    }
+
+    public function getEventCount(): ?int
+    {
+        return $this->eventCount;
+    }
+
+    public function setEventCount(int $eventCount): self
+    {
+        $this->eventCount = $eventCount;
 
         return $this;
     }

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "03d05efc12af02bfe54b3bfb2ce9bd50",
+    "content-hash": "4b4fa06fe4773e23b224a6b907b5fb80",
     "packages": [
         {
             "name": "api-platform/core",
@@ -2565,106 +2565,6 @@
                 }
             ],
             "time": "2022-03-08T12:57:56+00:00"
-        },
-        {
-            "name": "jsvrcek/ics",
-            "version": "0.8.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/jasvrcek/ICS.git",
-                "reference": "f3a420f69e0a2bd87ad6c751ae1ee87faef35514"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/jasvrcek/ICS/zipball/f3a420f69e0a2bd87ad6c751ae1ee87faef35514",
-                "reference": "f3a420f69e0a2bd87ad6c751ae1ee87faef35514",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.6"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^4.8 || ^5.5 || >=6.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Jsvrcek\\ICS\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Justin Svrcek",
-                    "homepage": "https://github.com/jasvrcek"
-                }
-            ],
-            "description": "abstraction layer for creating multi-byte safe RFC 5545 compliant .ics files",
-            "homepage": "https://github.com/jasvrcek/ICS",
-            "keywords": [
-                ".ics",
-                "RFC 5545",
-                "calendar",
-                "export",
-                "ical",
-                "multi-byte safe"
-            ],
-            "support": {
-                "issues": "https://github.com/jasvrcek/ICS/issues",
-                "source": "https://github.com/jasvrcek/ICS/tree/0.8.3"
-            },
-            "time": "2022-03-09T21:22:57+00:00"
-        },
-        {
-            "name": "jsvrcek/ics-bundle",
-            "version": "dev-tac",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/tacman/IcsBundle.git",
-                "reference": "5f056946466abf2c38ebde0349f3afa7819adb7b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/tacman/IcsBundle/zipball/5f056946466abf2c38ebde0349f3afa7819adb7b",
-                "reference": "5f056946466abf2c38ebde0349f3afa7819adb7b",
-                "shasum": ""
-            },
-            "require": {
-                "jsvrcek/ics": "~0.1",
-                "php": ">=7.4",
-                "symfony/framework-bundle": ">=4.4"
-            },
-            "type": "symfony-bundle",
-            "autoload": {
-                "psr-4": {
-                    "Jsvrcek\\Bundle\\IcsBundle\\": ""
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Justin Svrcek",
-                    "homepage": "https://github.com/jasvrcek"
-                }
-            ],
-            "description": "This bundle provides a dependency injection wrapper for the JsvrcekICS iCal library",
-            "homepage": "https://github.com/jasvrcek/IcsBundle",
-            "keywords": [
-                ".ics",
-                "RFC 5545",
-                "calendar",
-                "export",
-                "ical"
-            ],
-            "support": {
-                "source": "https://github.com/tacman/IcsBundle/tree/tac"
-            },
-            "time": "2022-04-12T17:26:31+00:00"
         },
         {
             "name": "kevinpapst/tabler-bundle",
@@ -12406,7 +12306,6 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "jsvrcek/ics-bundle": 20,
         "kevinpapst/tabler-bundle": 20,
         "survos/workflow-extension-bundle": 20,
         "survos/maker-bundle": 20
