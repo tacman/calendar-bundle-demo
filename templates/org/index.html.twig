@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Org index{% endblock %}
+
+
+{% block body %}
+    <h1>Org index</h1>
+
+    {% include "org/_table.html.twig" %}
+
+    <a class="btn btn-primary" href="{{ path('org_new') }}"><span class="fas fa-plus"></span>New  Org</a>
+{% endblock %}

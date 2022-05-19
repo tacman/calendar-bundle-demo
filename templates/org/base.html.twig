@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}BASE Org{% endblock %}
+
+{% block page_title %}{{ org }}{% endblock %}
+{% block page_subtitle %}{{ app.request.get('_route') }}{% endblock %}
+
+{% block body %}
+
+If we have a Org entity, we should display it here.
+
+{% endblock %}

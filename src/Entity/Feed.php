@@ -2,6 +2,11 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use App\Api\Filter\MultiFieldSearchFilter;
 use App\Repository\FeedRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -12,6 +17,14 @@ use Survos\WorkflowBundle\Traits\MarkingInterface;
 use Survos\WorkflowBundle\Traits\MarkingTrait;
 
 #[ORM\Entity(repositoryClass: FeedRepository::class)]
+#[ApiResource(
+    normalizationContext: ['groups' => [ 'minimum', 'rp']],
+//    normalizationContext: ['groups' => ['Default', 'minimum', 'marking', 'browse', 'transitions', 'rp']],
+    denormalizationContext: ['groups' => ["Default", "minimum", "browse"]],
+)]
+#[ApiFilter(OrderFilter::class, properties: ['marking', 'org', 'size', 'shortName', 'forkedFromId', 'fullName'], arguments: ['orderParameterName' => 'order'])]
+#[ApiFilter(SearchFilter::class, properties: ["marking" => "exact", 'ownerType' => 'exact', 'fullName' => 'partial', 'forkedFromId' => 'exact', 'isZip' => 'exact'])]
+#[ApiFilter(MultiFieldSearchFilter::class, properties: ['fullName', 'shortName'], arguments: ["searchParameterName" => "search"])]
 class Feed extends SurvosBaseEntity implements MarkingInterface
 {
     use MarkingTrait;

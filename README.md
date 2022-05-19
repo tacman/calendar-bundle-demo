@@ -15,7 +15,15 @@ Individuals can also belong to calendars, including private ones if given permis
 * Individuals can
   * Subscribe to iCal feeds, either in their ccal account or Google account
 
-## 
+## Entities
+
+* Org
+   * Cal
+     * Event
+   * Feed
+     * Booking (ICS Event)
+
+https://github.com/tattali/CalendarBundle/blob/master/src/Resources/doc/multi-calendar.md
 
 ## Sample feeds
 
@@ -29,7 +37,10 @@ in use: https://github.com/u01jmg3/ics-parser
 
 to write iCS:
 
-https://github.com/jasvrcek/ICS and https://github.com/jasvrcek/IcsBundle
+(seems to be more current)
 https://github.com/spatie/icalendar-generator
+
+(funky DI)
+https://github.com/jasvrcek/ICS and https://github.com/jasvrcek/IcsBundle
 
 

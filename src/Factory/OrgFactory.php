@@ -39,8 +39,7 @@ final class OrgFactory extends ModelFactory
     {
         return [
             // TODO add your default values here (https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#model-factories)
-            'name' => self::faker()->text(),
-            'slug' => self::faker()->text(),
+            'name' => self::faker()->domainName(),
         ];
     }
 

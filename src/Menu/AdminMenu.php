@@ -18,8 +18,9 @@ class AdminMenu extends BaseAdminMenu
     {
         $root = $builder->root();
 
-//        $this->addMenuItem($root, ['route' => 'feed_index']);
-//        $this->addMenuItem($root, ['route' => 'feed_new']);
+        $this->addMenuItem($root, ['route' => 'org_index']);
+        $this->addMenuItem($root, ['route' => 'org_browse']);
+        $this->addMenuItem($root, ['route' => 'org_new']);
 
 
         // Create a new entry with route

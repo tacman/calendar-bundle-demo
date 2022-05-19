@@ -2,15 +2,32 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use App\Api\Filter\MultiFieldSearchFilter;
 use App\Repository\CalRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Survos\BaseBundle\Entity\SurvosBaseEntity;
+use Survos\WorkflowBundle\Traits\MarkingInterface;
+use Survos\WorkflowBundle\Traits\MarkingTrait;
 
 #[ORM\Entity(repositoryClass: CalRepository::class)]
 #[ORM\Table('calendar')]
-#[ApiResource]
-class Cal
+#[ApiResource(
+    normalizationContext: ['groups' => ['Default', 'minimum', 'marking', 'browse', 'transitions', 'rp']],
+    denormalizationContext: ['groups' => ["Default", "minimum", "browse"]],
+)]
+#[ApiFilter(OrderFilter::class, properties: ['marking', 'name'], arguments: ['orderParameterName' => 'order'])]
+#[ApiFilter(SearchFilter::class, properties: ["marking" => "exact", 'ownerType' => 'exact', 'fullName' => 'partial', 'forkedFromId' => 'exact', 'isZip' => 'exact'])]
+#[ApiFilter(MultiFieldSearchFilter::class, properties: ['fullName', 'shortName'], arguments: ["searchParameterName" => "search"])]
+class Cal extends SurvosBaseEntity implements MarkingInterface
 {
+    use MarkingTrait;
+
+    const PLACE_NEW = 'new';
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]

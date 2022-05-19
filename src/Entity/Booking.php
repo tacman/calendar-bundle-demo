@@ -7,21 +7,6 @@ use App\Repository\BookingRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\{Entity, Column, Id, GeneratedValue};
 
-// This is a typical Doctrine ORM entity.
-#[Entity]
-class Foo
-{
-    #[Column]
-    #[Id]
-    #[GeneratedValue]
-    public int $id;
-
-    #[Column]
-    public string $name;
-
-
-    // Works with private and protected methods with getters and setters too.
-}
 #[ORM\Entity(repositoryClass: BookingRepository::class)]
 #[ApiResource]
 class Booking
