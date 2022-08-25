@@ -59,6 +59,7 @@ class AppController extends AbstractController
     public function menu(): Response
     {
         return $this->render('app/mmenu_light.html.twig', [
+//        return $this->render('app/bootstrap_collapsible_menu.html.twig', [
         ]);
     }
 }

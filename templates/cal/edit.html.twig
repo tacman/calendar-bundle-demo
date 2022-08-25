@@ -1,0 +1,8 @@
+{% extends "cal/base.html.twig" %}
+
+{% block body %}
+    <h1>Edit Cal</h1>
+
+    {{ include('cal/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('cal/_delete_form.html.twig') }}
+{% endblock %}

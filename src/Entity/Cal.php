@@ -11,6 +11,7 @@ use App\Repository\CalRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Survos\BaseBundle\Entity\SurvosBaseEntity;
 use Survos\WorkflowBundle\Traits\MarkingInterface;
 use Survos\WorkflowBundle\Traits\MarkingTrait;
@@ -39,6 +40,7 @@ class Cal extends SurvosBaseEntity implements MarkingInterface
     private $name;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Gedmo\Slug(fields: ['name'])]
     private $slug;
 
     #[ORM\ManyToOne(targetEntity: Org::class, inversedBy: 'calendars')]

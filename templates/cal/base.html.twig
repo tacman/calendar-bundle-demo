@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}BASE Cal{% endblock %}
+
+{% block page_title %}{{ cal }}{% endblock %}
+{% block page_subtitle %}{{ app.request.get('_route') }}{% endblock %}
+
+{% block body %}
+
+If we have a Cal entity, we should display it here.
+
+{% endblock %}

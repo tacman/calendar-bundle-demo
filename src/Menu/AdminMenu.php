@@ -57,11 +57,11 @@ class AdminMenu extends BaseAdminMenu
 
         ;
 
-//        $root->add('Menu')
-//            ->icon('uil-apps')
-//            ->route('app_menu')
-//            ->end()
-//        ;
+        $root->add('Menu')
+            ->icon('uil-apps')
+            ->route('app_menu')
+            ->end()
+        ;
 
     }
 

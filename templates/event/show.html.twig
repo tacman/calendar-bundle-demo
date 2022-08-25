@@ -1,0 +1,37 @@
+{% extends "event/base.html.twig" %}
+
+{% block body %}
+    <h1>Event</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ event.id }}</td>
+            </tr>
+            <tr>
+                <th>IcalEvent</th>
+                <td>{{ event.icalEvent }}</td>
+            </tr>
+            <tr>
+                <th>StartTime</th>
+                <td>{{ event.startTime ? event.startTime|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>EndTime</th>
+                <td>{{ event.endTime ? event.endTime|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ event.title }}</td>
+            </tr>
+            <tr>
+                <th>Marking</th>
+                <td>{{ event.marking }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a class="btn btn-primary" href="{{ path('event_edit', event.rp) }}">edit</a>
+    {{ include('event/_delete_form.html.twig') }}
+{% endblock %}

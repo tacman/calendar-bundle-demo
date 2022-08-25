@@ -13,6 +13,7 @@ import { ray } from 'node-ray/web';
 
 // https://stackoverflow.com/questions/68084742/dropdown-doesnt-work-after-modal-of-bootstrap-imported
 import Modal from 'bootstrap/js/dist/modal';
+var constants = require('./../js/constants');
 
 export default class extends Controller {
 
@@ -26,10 +27,22 @@ export default class extends Controller {
     connect() {
 
         console.log('hello from ' + this.identifier + ' ' + this.urlValue);
+        console.log('listening for custom event ' + constants.INPUT_DATA_CHANGED); // 'some value'
+
+        window.addEventListener('animalfound', (e) => console.log(e.detail.name));
+
+        window.addEventListener(constants.INPUT_DATA_CHANGED, (evt) => {
+            console.log("receiving " + constants.INPUT_DATA_CHANGED, evt, evt.detail, evt.detail.data);
+            this.parseIcsCalendar(this.calendarTarget, evt.detail.data);
+        });
         // this.demo(this.calendarTarget);
-        this.parseIcsCalendar(this.calendarTarget);
         let self = this;
 
+    }
+
+    updateCalendar(e)
+    {
+        console.warn(e);
     }
 
     openModal(e) {
@@ -46,8 +59,9 @@ export default class extends Controller {
         this.modal.show();
     }
 
-    parseIcsCalendar(calendarEl)
+    parseIcsCalendar(calendarEl, formData)
     {
+        console.log(formData);
         let eventSources = [
             {
                 url: this.urlValue,
@@ -63,7 +77,7 @@ export default class extends Controller {
                 },
             },
         ];
-        console.log(eventSources);
+        // console.log(eventSources);
 
         var calendar = new Calendar(calendarEl, {
             plugins: [ interactionPlugin, dayGridPlugin, timeGridPlugin, listPlugin ],

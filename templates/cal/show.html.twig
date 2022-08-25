@@ -1,0 +1,37 @@
+{% extends "cal/base.html.twig" %}
+
+{% block body %}
+    <h1>Cal</h1>
+
+
+
+    {{ include('event/_table.html.twig', {events: cal.events}) }}
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ cal.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ cal.name }}</td>
+            </tr>
+            <tr>
+                <th>Slug</th>
+                <td>{{ cal.slug }}</td>
+            </tr>
+            <tr>
+                <th>EventCount</th>
+                <td>{{ cal.eventCount }}</td>
+            </tr>
+            <tr>
+                <th>Marking</th>
+                <td>{{ cal.marking }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a class="btn btn-primary" href="{{ path('cal_edit', cal.rp) }}">edit</a>
+    {{ include('cal/_delete_form.html.twig') }}
+{% endblock %}

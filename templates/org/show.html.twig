@@ -3,7 +3,7 @@
 {% block body %}
     <h1>Org: {{ org }}</h1>
 
-
+    {{ include('cal/_table.html.twig', {cals: org.calendars}) }}
     <table class="table">
         <tbody>
             <tr>

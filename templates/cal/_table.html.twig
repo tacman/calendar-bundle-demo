@@ -1,0 +1,44 @@
+
+
+<table class="table js-datatable">
+    <thead>
+    <tr>
+        <th>actions</th>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Slug</th>
+                    <th>EventCount</th>
+                    <th>Marking</th>
+            </tr>
+    </thead>
+    <tbody>
+    {% for cal in cals %}
+    <tr>
+        <td>
+            <a href="{{ path('cal_show', cal.rp) }}">
+                <span class="fas fa-eye"></span>
+                <i class="bi bi-info"></i>
+            </a>
+            <a href="{{ path('cal_edit', cal.rp) }}">
+                <span class="fas fa-edit"></span>
+                <i class="bi bi-pencil"></i>
+            </a>
+        </td>
+
+                    <td>{{ cal.id }}</td>
+                    <td>            <a href="{{ path('cal_show', cal.rp) }}">
+
+                        {{ cal.name }}
+                        </a>
+                    </td>
+                    <td>{{ cal.slug }}</td>
+                    <td>{{ cal.eventCount }}</td>
+                    <td>{{ cal.marking }}</td>
+            </tr>
+    {% else %}
+    <tr>
+        <td colspan="6">no records found</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>

@@ -37,13 +37,12 @@ final class EventFactory extends ModelFactory
 
     protected function getDefaults(): array
     {
-        $startTime =  new \DateTime(sprintf('-%d days', rand(1, 100)));
-//        $endTime = strtotime("+15 minutes", $startTime);
-//        dd($startTime, $endTime);
+        $startTime =  new \DateTimeImmutable(sprintf('-%d days +%d hours', rand(1, 60), rand(2,24)));
+        $endTime = $startTime->add(new \DateInterval("PT30M"));
         return [
             // TODO add your default values here (https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#model-factories)
             'startTime' => $startTime,
-//            'endTime' => rand(0, 8) >= 7 ? $startTime + (30 * rand(0,4)) : null,
+            'endTime' => rand(0, 8) <= 7 ? $startTime->add(new \DateInterval(sprintf("PT%dM", rand(1,4) * 30))) : null,
             'title' => self::faker()->text(),
         ];
     }

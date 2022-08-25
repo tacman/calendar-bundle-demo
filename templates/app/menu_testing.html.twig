@@ -5,6 +5,7 @@
     }) %}
 
     {% set _menu_controller = 'mmenu' %}
+
 <div {{ stimulus_controller(_menu_controller) }}>
     <div {{ stimulus_target(_menu_controller, 'msg') }}>Message here.</div>
     <nav {{ stimulus_target(_menu_controller, 'menu') }}>

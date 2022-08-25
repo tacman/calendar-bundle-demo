@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Booking;
 use App\Form\BookingType;
 use App\Repository\BookingRepository;
+use App\Repository\OrgRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -41,9 +42,12 @@ class BookingController extends AbstractController
     }
 
     #[Route('/calendar', name: 'booking_calendar', methods: ['GET'])]
-    public function calendar(): Response
+    public function calendar(OrgRepository $orgRepository): Response
     {
-        return $this->render('booking/calendar.html.twig');
+
+        return $this->render('booking/calendar.html.twig', [
+            'orgs' => $orgRepository->findAll()
+        ]);
     }
 
     #[Route('/{id}', name: 'booking_show', methods: ['GET'])]

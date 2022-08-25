@@ -41,6 +41,14 @@ class OrgController extends AbstractController
         ]);
     }
 
+    #[Route('/calendars', name: 'org_calendars', options: ['expose' => true])]
+    public function calendars(Org $org): Response
+    {
+        return $this->render('org/calendars.html.twig', [
+            'org' => $org,
+        ]);
+    }
+
     #[Route('/edit', name: 'org_edit', options: ['expose' => true])]
     public function edit(Request $request, Org $org): Response
     {

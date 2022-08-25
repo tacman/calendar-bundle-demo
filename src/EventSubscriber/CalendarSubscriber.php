@@ -2,24 +2,20 @@
 
 namespace App\EventSubscriber;
 
-use App\Repository\BookingRepository;
+use App\Repository\EventRepository;
 use CalendarBundle\CalendarEvents;
-use CalendarBundle\Entity\Event;
+use App\Entity\Event;
+use CalendarBundle\Entity\Event as CalendarBundleEvent;
 use CalendarBundle\Event\CalendarEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class CalendarSubscriber implements EventSubscriberInterface
 {
-    private $bookingRepository;
-    private $router;
-
     public function __construct(
-        BookingRepository $bookingRepository,
-        UrlGeneratorInterface $router
+        private EventRepository $eventRepository,
+        private UrlGeneratorInterface $router
     ) {
-        $this->bookingRepository = $bookingRepository;
-        $this->router = $router;
     }
 
     public static function getSubscribedEvents()
@@ -35,23 +31,25 @@ class CalendarSubscriber implements EventSubscriberInterface
         $end = $calendar->getEnd();
         $filters = $calendar->getFilters();
 
+
         // Modify the query to fit to your entity and needs
-        // Change booking.beginAt by your start date property
-        $bookings = $this->bookingRepository
-            ->createQueryBuilder('booking')
-            ->where('booking.beginAt BETWEEN :start and :end OR booking.endAt BETWEEN :start and :end')
+        // Change event.beginAt by your start date property
+        /** @var Event[] $events */
+        $events = $this->eventRepository
+            ->createQueryBuilder('event')
+            ->where('event.startTime BETWEEN :start and :end OR event.endTime BETWEEN :start and :end')
             ->setParameter('start', $start->format('Y-m-d H:i:s'))
             ->setParameter('end', $end->format('Y-m-d H:i:s'))
             ->getQuery()
             ->getResult()
         ;
 
-        foreach ($bookings as $booking) {
-            // this create the events with your data (here booking data) to fill calendar
-            $bookingEvent = new Event(
-                $booking->getTitle(),
-                $booking->getBeginAt(),
-                $booking->getEndAt() // If the end date is null or not defined, a all day event is created.
+        foreach ($events as $event) {
+            // this create the events with your data (here event data) to fill calendar
+            $bookingEvent = new CalendarBundleEvent(
+                $event->getCal()->getName() . '/' . $event->getTitle(),
+                $event->getStartTime(),
+                $event->getEndTime() // If the end date is null or not defined, a all day event is created.
             );
 
             /*
@@ -67,9 +65,7 @@ class CalendarSubscriber implements EventSubscriberInterface
             ]);
             $bookingEvent->addOption(
                 'url',
-                $this->router->generate('booking_show', [
-                    'id' => $booking->getId(),
-                ])
+                $this->router->generate('event_show', $event->getRP())
             );
 
             // finally, add the event to the CalendarEvent to fill the calendar

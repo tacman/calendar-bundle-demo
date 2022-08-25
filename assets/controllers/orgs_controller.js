@@ -14,7 +14,7 @@ export default class extends SurvosDataTable_controller {
             this.c({propertyName: 'id'}),
             this.c({propertyName: 'name', route: 'org_show' }),
             this.c({propertyName: 'slug'}),
-            this.c({propertyName: 'calCount'}),
+            this.c({propertyName: 'calCount', route: 'org_calendars'}),
             // this.c({
             //     propertyName: 'youtubeId',
             //     render: (data, type, row, meta) => {

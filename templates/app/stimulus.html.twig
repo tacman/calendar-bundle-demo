@@ -1,7 +1,31 @@
 {# templates/booking/calendar.html.twig #}
-{% extends 'base.html.twig' %}
+{% extends '@SurvosBase/bootstrap_shell/base.html.twig' %}
+{% block sidebar %}
+    <h3>My Calendars</h3>
+    <h3>Other Calendars</h3>
+    <ul>
 
-{% block content %}
+        {% for org in orgs %}
+            <li>
+                {{ org }}
+                <ul>
+
+                    {% for cal in org.calendars %}
+                        <li>
+                            <input type="checkbox">
+                            {{ cal }}
+
+                        </li>
+                    {% endfor %}
+
+                </ul>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
+
+
+{% block body %}
 
 
     {% set _controller = 'fullcalendar' %}

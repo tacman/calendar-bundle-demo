@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Cal index{% endblock %}
+
+
+{% block body %}
+    <h1>Cal index</h1>
+
+    {% include "cal/_table.html.twig" %}
+
+    <a class="btn btn-primary" href="{{ path('cal_new') }}"><span class="fas fa-plus"></span>New  Cal</a>
+{% endblock %}

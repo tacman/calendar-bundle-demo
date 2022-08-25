@@ -18,15 +18,15 @@ class AppFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
 //        ContestFactory::new()->createMany(20);
-        OrgFactory::new()->createMany(5);
-        CalFactory::createMany(
-            40,
+        $orgs = OrgFactory::new()->createMany(5);
+        $cals = CalFactory::createMany(
+            10,
             function() {
                 return ['org' => OrgFactory::random()];
             }
         );
-        EventFactory::createMany(
-            80,
+        $events = EventFactory::createMany(
+            180,
             function() {
                 return ['cal' => CalFactory::random()];
             }
@@ -45,6 +45,14 @@ class AppFixtures extends Fixture
 
             $manager->persist($feed);
         }
+
+        foreach ($orgs as $org) {
+            $org->setCalCount($org->getCalendars()->count());
+        }
+        foreach ($cals as $cal) {
+            $cal->setEventCount($cal->getEvents()->count());
+        }
+
         $manager->flush();
     }
 }

@@ -1,56 +1,213 @@
 {# templates/booking/calendar.html.twig #}
-{% extends 'base.html.twig' %}
+{% extends '@SurvosBase/bootstrap_shell/base.html.twig' %}
+
+{% block body block('content') %}
+
+{% block sidebar %}
+    <h3>My Calendars</h3>
+    <h3>Other Calendars</h3>
+
+    {% set _controller = 'search' %}
+    <form method="post" {{ stimulus_controller(_controller) }}
+            {{ stimulus_target(_controller, 'searchForm') }} >
+        <fieldset>
+            <legend>My Calendars</legend>
+            {% for org in orgs %}
+            {% for cal in org.calendars %}
+                <li>
+                    <input type="checkbox" name="calendars" value="{{ cal.id }}" >
+                    {{ cal }}
+                </li>
+            {% endfor %}
+            {% endfor %}
+        </fieldset>
+    </form>
+
+    <form {{ stimulus_controller(_controller) }}
+            {{ stimulus_target(_controller, 'searchForm') }}
+            {{ stimulus_action(_controller, 'updateCalendar') }}
+    >
+        <b><span {{ stimulus_target(_controller, 'debug') }}>(debug) </span></b>
+
+    <ul>
+    {% for org in orgs %}
+        <li>
+            {{ org }}
+            <ul>
+
+            {% for cal in org.calendars %}
+                <li>
+                    <input type="checkbox" >
+                    {{ cal }}
+
+                </li>
+            {% endfor %}
+
+            </ul>
+        </li>
+    {% endfor %}
+    </ul>
+    </form>
+{% endblock %}
+
+{% block calendar_content %}
+
+    {% set _controller = 'fullcalendar' %}
+    <div {{ stimulus_controller(_controller, {
+        url: path('fc_load_events')
+    }) }} >
+
+        <div {{ stimulus_target(_controller, 'calendar') }}>
+            calendar here.
+        </div>
+
+        <div {{ stimulus_target(_controller, 'modal') }}
+                class="modal fade"
+                tabindex="-1"
+                aria-hidden="true"
+        >
+            <div class="modal-dialog {{ modalClass|default('') }}">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">{{ modalTitle|default('title') }}</h5>
+                        <button type="button" class="btn-close"
+                                data-bs-dismiss="modal"
+                                aria-label="Close">
+                        </button>
+                    </div>
+
+                    <div class="modal-body" {{ stimulus_target(_controller, 'modalBody') }} >
+                        {{ modalContent|default('Loading...') }}
+                    </div>
+
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary"
+                                data-bs-dismiss="modal">Cancel
+                        </button>
+
+                        <a type="button" class="btn btn-secondary" href="{{ formUrl|default('#') }}">
+                            Open <span class="fas fa-external-link-alt"></span>
+                        </a>
+
+                        <button type="button" class="btn btn-primary" {{ stimulus_action(_controller, 'submitForm') }}>
+                            Save
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+    </div>
+
+
+    {#{{  }}#}
+    {#    {% set _controller = 'fullcalendar' %}#}
+    {#    <div {{ stimulus_controller(_controller, {#}
+
+    {#    }) }}>#}
+
+    {#        url: path('fc_load_events')#}
+
+    {#        <div {{ stimulus_target(_controller, 'msg') }}></div>#}
+    {#        <div {{ stimulus_target(_controller, 'calendar') }}>#}
+
+    {#        </div>#}
+    {#    </div>#}
+{% endblock %}
 
 {% block content %}
-    <div id="calendar-holder"></div>
+    <div class="container-fluid">
+        <div class="row flex-nowrap">
+            <div class="col-auto px-0">
+                <div id="sidebar" class="collapse collapse-horizontal show border-end">
+                    <div id="sidebar-nav" class="list-group border-0 rounded-0 text-sm-start min-vh-100">
+                        {% block sidebar_content %}
+                            {{ block('sidebar') }}
+                        <a href="{{ path('app_stimulus') }}" class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar"><i class="bi bi-calendar"></i> <span>Item</span></a>
+                        <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar"><i class="bi bi-envelope"></i> <span>Item</span></a>
+                        {% endblock %}
+                    </div>
+                </div>
+            </div>
+            <main class="col ps-md-2 pt-2">
+                <a href="#" data-bs-target="#sidebar" data-bs-toggle="collapse" class="border rounded-3 p-1 text-decoration-none"><i class="bi bi-list bi-lg py-2 p-1"></i> Menu</a>
+                <div class="page-header pt-3">
+                    <h2>Bootstrap 5 Sidebar Menu - Simple</h2>
+                </div>
+                <p class="lead">A offcanvas "push" vertical nav menu example.</p>
+                <hr>
+                <div class="row">
+                    <div class="col-12">
+                        <i class="bi bi-bootstrap"></i>
+                        Content
+                            <div id="calendar-holder"></div>
+
+                        {{ block('calendar_content') }}
+                        <p>This is a simple collapsing sidebar menu for Bootstrap 5. Unlike the Offcanvas component that overlays the content, this sidebar will "push" the content. Sriracha biodiesel taxidermy organic post-ironic, Intelligentsia salvia mustache 90's code editing brunch. Butcher polaroid VHS art party, hashtag Brooklyn deep v PBR narwhal sustainable mixtape swag wolf squid tote bag. Tote bag cronut semiotics, raw denim deep v taxidermy messenger bag. Tofu YOLO Etsy, direct trade ethical Odd Future jean shorts paleo. Forage Shoreditch tousled aesthetic irony, street art organic Bushwick artisan cliche semiotics ugh synth chillwave meditation. Shabby chic lomo plaid vinyl chambray Vice. Vice sustainable cardigan, Williamsburg master cleanse hella DIY 90's blog.</p>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+{% endblock %}
+
+{% block offcanvas_content %}
+<main>
+    <nav class="navbar bg-light" aria-label="Light offcanvas navbar">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Light offcanvas navbar</a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbarLight" aria-controls="offcanvasNavbarLight">
+                <span class="navbar-toggler-icon">Toggle</span>
+            </button>
+            <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbarLight" aria-labelledby="offcanvasNavbarLightLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasNavbarLightLabel">Offcanvas</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Link</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="offcanvasNavbarLightDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Dropdown
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="offcanvasNavbarLightDropdown">
+                                <li><a class="dropdown-item" href="#">Action</a></li>
+                                <li><a class="dropdown-item" href="#">Another action</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <form class="d-flex mt-3" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </nav>
+</main>
 {% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fullcalendar/core@4.1.0/main.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@4.1.0/main.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid@4.1.0/main.min.css">
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
-    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core@4.1.0/main.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/interaction@4.1.0/main.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@4.1.0/main.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid@4.1.0/main.min.js"></script>
-
-
-    <script type="text/javascript">
-        document.addEventListener('DOMContentLoaded', () => {
-            var calendarEl = document.getElementById('calendar-holder');
-
-            var calendar = new FullCalendar.Calendar(calendarEl, {
-                defaultView: 'dayGridMonth',
-                editable: true,
-                eventSources: [
-                    {
-                        url: "{{ path('fc_load_events') }}",
-                        method: "POST",
-                        extraParams: {
-                            anExtraParam: 'url for example',
-                            filters: JSON.stringify({
-                                'icsUrl' : 'https://www.officeholidays.com/ics/usa/arizona',
-                            })
-                        },
-                        failure: () => {
-                            // alert("There was an error while fetching FullCalendar!");
-                        },
-                    },
-                ],
-                header: {
-                    left: 'prev,next today',
-                    center: 'title',
-                    right: 'dayGridMonth,timeGridWeek,timeGridDay',
-                },
-                plugins: [ 'interaction', 'dayGrid', 'timeGrid' ], // https://fullcalendar.io/docs/plugin-index
-                timeZone: 'UTC',
-            });
-            calendar.render();
-        });
-    </script>
+    {{ encore_entry_script_tags('bootstrap') }}
 {% endblock %}
+

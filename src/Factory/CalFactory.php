@@ -28,6 +28,7 @@ use Zenstruck\Foundry\Proxy;
  */
 final class CalFactory extends ModelFactory
 {
+    private static  array $calTypes = ['Meetings', 'Public Events', 'Fundraisers'];
     public function __construct()
     {
         parent::__construct();
@@ -39,9 +40,23 @@ final class CalFactory extends ModelFactory
     {
         return [
             // TODO add your default values here (https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#model-factories)
-            'name' => self::faker()->text(),
-            'slug' => self::faker()->text(),
+            'name' => self::faker()->name() // $this->getACalendar()
         ];
+    }
+
+    private function getACalendar(): iterable
+    {
+        static $types;
+        if (empty($types)) {
+            $types = clone self::$calTypes;
+            shuffle($types);
+        }
+        dd($types);
+
+        foreach ($types as $type) {
+            dd($type);
+            yield $type;
+        }
     }
 
     protected function initialize(): self

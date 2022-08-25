@@ -1,0 +1,42 @@
+
+
+<table class="table js-datatable">
+    <thead>
+    <tr>
+        <th>actions</th>
+                    <th>Id</th>
+                    <th>IcalEvent</th>
+                    <th>StartTime</th>
+                    <th>EndTime</th>
+                    <th>Title</th>
+                    <th>Marking</th>
+            </tr>
+    </thead>
+    <tbody>
+    {% for event in events %}
+    <tr>
+        <td>
+            <a href="{{ path('event_show', event.rp) }}">
+                <span class="fas fa-eye"></span>
+                <i class="bi bi-info"></i>
+            </a>
+            <a href="{{ path('event_edit', event.rp) }}">
+                <span class="fas fa-edit"></span>
+                <i class="bi bi-pencil"></i>
+            </a>
+        </td>
+
+                    <td>{{ event.id }}</td>
+                    <td>{{ event.icalEvent }}</td>
+                    <td>{{ event.startTime ? event.startTime|date('Y-m-d H:i:s') : '' }}</td>
+                    <td>{{ event.endTime ? event.endTime|date('Y-m-d H:i:s') : '' }}</td>
+                    <td>{{ event.title }}</td>
+                    <td>{{ event.marking }}</td>
+            </tr>
+    {% else %}
+    <tr>
+        <td colspan="7">no records found</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>

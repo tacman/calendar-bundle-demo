@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Event index{% endblock %}
+
+
+{% block body %}
+    <h1>Event index</h1>
+
+    {% include "event/_table.html.twig" %}
+
+    <a class="btn btn-primary" href="{{ path('event_new') }}"><span class="fas fa-plus"></span>New  Event</a>
+{% endblock %}

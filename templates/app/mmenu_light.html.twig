@@ -7,7 +7,6 @@
 
     <title>mmenu - Demo</title>
 
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
     {{ encore_entry_link_tags('app') }}
 
 <body {{ stimulus_controller('mmenu_light') }}>
@@ -19,6 +18,10 @@
         <span>demo</span>
     </div>
     <div id="content">
+        {% for i in 1..100 %}
+            {{ i * 30 }}
+        {% endfor %}
+
         <h4>This is a demo.</h4>
         <p>Click the menu icon to toggle the menu.</p>
     </div>		</div>
@@ -49,15 +52,8 @@
         <li><a href="#/contact">Contact</a></li>
     </ul>
 </nav>
-<script src="js/playground.js"></script>
 
 {{ encore_entry_script_tags('app') }}
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-
-
-    });
-</script>
 </body>
 </html>
 
