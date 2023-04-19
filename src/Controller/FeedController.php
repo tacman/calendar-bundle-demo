@@ -8,8 +8,6 @@ use App\Entity\Feed;
 use App\Form\FeedType;
 use Doctrine\ORM\EntityManagerInterface;
 // use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Survos\BaseBundle\Traits\WorkflowHelperTrait;
-use Survos\WorkflowBundle\Traits\HandleTransitionsTrait;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,26 +17,8 @@ use Symfony\Component\Workflow\WorkflowInterface;
 #[Route('/feed/{feedId}')]
 class FeedController extends AbstractController
 {
-    use WorkflowHelperTrait;
-    use HandleTransitionsTrait;
     public function __construct(private EntityManagerInterface $entityManager)
     {
-    }
-
-    #[Route(path: '/feed_transition/{transition}.{_format}', name: 'feed_transition', options: ['expose' => true])]
-    public function feed_transition(Request $request, Feed $feed, WorkflowInterface $feedStateMachine, ?string $transition=null, $_format = 'json')
-    {
-        // if there's no transition, it's because it's part of a form
-        if (empty($transition) || $transition == '_') {
-            $transition = $request->request->get('transition');
-        }
-        $jsonResponse = $this->_transition($request, $feed, $transition, $feedStateMachine, $this->entityManager, Feed::class, $_format);
-        if ($_format === 'json') {
-            return $jsonResponse;
-        } else {
-            return $this->redirectToRoute('feed_show', $feed->getRP());
-        }
-
     }
 
     #[Route('/', name: 'feed_show')]

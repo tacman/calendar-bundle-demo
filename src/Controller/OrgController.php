@@ -21,18 +21,6 @@ class OrgController extends AbstractController
 
     }
 
-    #[Route(path: '/transition/{transition}', name: 'org_transition')]
-    public function transition(Request $request, WorkflowInterface $orgStateMachine, string $transition, Org $org): Response
-    {
-        if ($transition === '_') {
-            $transition = $request->request->get('transition'); // the _ is a hack to display the form, @todo: cleanup
-        }
-
-        $this->handleTransitionButtons($orgStateMachine, $transition, $org);
-        $this->entityManager->flush(); // to save the marking
-        return $this->redirectToRoute('org_show', $org->getRP());
-    }
-
     #[Route('/', name: 'org_show', options: ['expose' => true])]
     public function show(Org $org): Response
     {

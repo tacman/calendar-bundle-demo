@@ -12,9 +12,9 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Survos\BaseBundle\Entity\SurvosBaseEntity;
-use Survos\WorkflowBundle\Traits\MarkingInterface;
-use Survos\WorkflowBundle\Traits\MarkingTrait;
+use Survos\CoreBundle\Entity\RouteParametersInterface;
+use Survos\CoreBundle\Entity\RouteParametersTrait;
+use Symfony\Component\Routing\Route;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: OrgRepository::class)]
@@ -26,9 +26,9 @@ use Symfony\Component\Serializer\Annotation\Groups;
 #[ApiFilter(SearchFilter::class, properties: ["marking" => "exact", 'ownerType' => 'exact', 'fullName' => 'partial', 'forkedFromId' => 'exact', 'isZip' => 'exact'])]
 #[ApiFilter(MultiFieldSearchFilter::class, properties: ['fullName', 'shortName'], arguments: ["searchParameterName" => "search"])]
 
-class Org extends SurvosBaseEntity implements MarkingInterface
+class Org implements RouteParametersInterface, \Stringable
 {
-    use MarkingTrait;
+    use RouteParametersTrait;
 
     const PLACE_NEW = 'new';
     #[ORM\Id]
@@ -138,4 +138,10 @@ class Org extends SurvosBaseEntity implements MarkingInterface
     {
         return ['orgId' => $this->getSlug()];
     }
+
+    public function __toString(): string
+    {
+        return $this->getName();
+    }
+
 }

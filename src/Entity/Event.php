@@ -6,14 +6,16 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\EventRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Survos\BaseBundle\Entity\SurvosBaseEntity;
+use Survos\CoreBundle\Entity\RouteParametersInterface;
+use Survos\CoreBundle\Entity\RouteParametersTrait;
 use Survos\WorkflowBundle\Traits\MarkingInterface;
 use Survos\WorkflowBundle\Traits\MarkingTrait;
 
 #[ORM\Entity(repositoryClass: EventRepository::class)]
 #[ApiResource]
-class Event extends SurvosBaseEntity implements MarkingInterface
+class Event implements RouteParametersInterface
 {
-    use MarkingTrait;
+    use RouteParametersTrait;
     const PLACE_NEW = 'new';
 
     public function __construct()

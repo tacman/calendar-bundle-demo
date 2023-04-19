@@ -172,15 +172,6 @@
     "graceas/php-ics-reader": {
         "version": "v1.1"
     },
-    "guzzlehttp/guzzle": {
-        "version": "7.4.2"
-    },
-    "guzzlehttp/promises": {
-        "version": "1.5.1"
-    },
-    "guzzlehttp/psr7": {
-        "version": "2.2.1"
-    },
     "johngrogg/ics-parser": {
         "version": "v3.1.1"
     },
@@ -193,18 +184,6 @@
     "knplabs/knp-menu-bundle": {
         "version": "v3.2.0"
     },
-    "knpuniversity/oauth2-client-bundle": {
-        "version": "2.10",
-        "recipe": {
-            "repo": "github.com/symfony/recipes-contrib",
-            "branch": "master",
-            "version": "1.20",
-            "ref": "1ff300d8c030f55c99219cc55050b97a695af3f6"
-        },
-        "files": [
-            "config/packages/knpu_oauth2_client.yaml"
-        ]
-    },
     "laminas/laminas-code": {
         "version": "4.5.1"
     },
@@ -213,12 +192,6 @@
     },
     "league/config": {
         "version": "v1.1.1"
-    },
-    "league/oauth2-client": {
-        "version": "2.6.1"
-    },
-    "mindscreen/yarnlock": {
-        "version": "v1.0.1"
     },
     "monolog/monolog": {
         "version": "2.4.0"
@@ -247,9 +220,6 @@
     "nikic/php-parser": {
         "version": "v4.13.2"
     },
-    "paragonie/random_compat": {
-        "version": "v9.99.100"
-    },
     "php-cs-fixer/diff": {
         "version": "v2.0.2"
     },
@@ -274,41 +244,17 @@
     "psr/event-dispatcher": {
         "version": "1.0.0"
     },
-    "psr/http-client": {
-        "version": "1.0.1"
-    },
-    "psr/http-factory": {
-        "version": "1.0.1"
-    },
-    "psr/http-message": {
-        "version": "1.0.1"
-    },
     "psr/link": {
         "version": "2.0.1"
     },
     "psr/log": {
         "version": "3.0.0"
     },
-    "ralouphie/getallheaders": {
-        "version": "3.0.3"
-    },
     "ramsey/collection": {
         "version": "1.2.2"
     },
     "ramsey/uuid": {
         "version": "4.3.1"
-    },
-    "sensio/framework-extra-bundle": {
-        "version": "6.2",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "master",
-            "version": "5.2",
-            "ref": "fb7e19da7f013d0d422fa9bce16f5c510e27609b"
-        },
-        "files": [
-            "config/packages/sensio_framework_extra.yaml"
-        ]
     },
     "spatie/backtrace": {
         "version": "1.2.1"
@@ -337,8 +283,11 @@
             "config/packages/stof_doctrine_extensions.yaml"
         ]
     },
-    "survos/base-bundle": {
-        "version": "2.0.5"
+    "survos/bootstrap-bundle": {
+        "version": "1.4.27"
+    },
+    "survos/core-bundle": {
+        "version": "1.4.27"
     },
     "survos/maker-bundle": {
         "version": "2.1.0"
@@ -643,6 +592,9 @@
             "config/packages/twig.yaml",
             "templates/base.html.twig"
         ]
+    },
+    "symfony/ux-twig-component": {
+        "version": "v2.7.1"
     },
     "symfony/validator": {
         "version": "6.0",

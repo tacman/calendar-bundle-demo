@@ -12,9 +12,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Survos\BaseBundle\Entity\SurvosBaseEntity;
-use Survos\WorkflowBundle\Traits\MarkingInterface;
-use Survos\WorkflowBundle\Traits\MarkingTrait;
+use Survos\CoreBundle\Entity\RouteParametersInterface;
+use Survos\CoreBundle\Entity\RouteParametersTrait;
 
 #[ORM\Entity(repositoryClass: FeedRepository::class)]
 #[ApiResource(
@@ -25,9 +24,9 @@ use Survos\WorkflowBundle\Traits\MarkingTrait;
 #[ApiFilter(OrderFilter::class, properties: ['marking', 'org', 'size', 'shortName', 'forkedFromId', 'fullName'], arguments: ['orderParameterName' => 'order'])]
 #[ApiFilter(SearchFilter::class, properties: ["marking" => "exact", 'ownerType' => 'exact', 'fullName' => 'partial', 'forkedFromId' => 'exact', 'isZip' => 'exact'])]
 #[ApiFilter(MultiFieldSearchFilter::class, properties: ['fullName', 'shortName'], arguments: ["searchParameterName" => "search"])]
-class Feed extends SurvosBaseEntity implements MarkingInterface
+class Feed implements RouteParametersInterface
 {
-    use MarkingTrait;
+    use RouteParametersTrait;
 
     const WORKFLOW = 'feed';
     const ICON = 'fas fa-chart-column';

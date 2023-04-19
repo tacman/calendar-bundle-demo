@@ -13,6 +13,8 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Survos\BaseBundle\Entity\SurvosBaseEntity;
+use Survos\CoreBundle\Entity\RouteParametersInterface;
+use Survos\CoreBundle\Entity\RouteParametersTrait;
 use Survos\WorkflowBundle\Traits\MarkingInterface;
 use Survos\WorkflowBundle\Traits\MarkingTrait;
 
@@ -25,9 +27,9 @@ use Survos\WorkflowBundle\Traits\MarkingTrait;
 #[ApiFilter(OrderFilter::class, properties: ['marking', 'name'], arguments: ['orderParameterName' => 'order'])]
 #[ApiFilter(SearchFilter::class, properties: ["marking" => "exact", 'ownerType' => 'exact', 'fullName' => 'partial', 'forkedFromId' => 'exact', 'isZip' => 'exact'])]
 #[ApiFilter(MultiFieldSearchFilter::class, properties: ['fullName', 'shortName'], arguments: ["searchParameterName" => "search"])]
-class Cal extends SurvosBaseEntity implements MarkingInterface
+class Cal implements RouteParametersInterface, \Stringable
 {
-    use MarkingTrait;
+    use RouteParametersTrait;
 
     const PLACE_NEW = 'new';
 
@@ -143,5 +145,10 @@ class Cal extends SurvosBaseEntity implements MarkingInterface
         $this->eventCount = $eventCount;
 
         return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->getName();
     }
 }

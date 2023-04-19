@@ -13,13 +13,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Survos\WorkflowBundle\Traits\HandleTransitionsTrait;
 
 #[Route('/event')]
 class EventCollectionController extends AbstractController
 {
-
-use HandleTransitionsTrait;
 
 const PLACE_NEW = 'new';
 

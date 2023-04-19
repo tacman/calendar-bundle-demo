@@ -4,6 +4,26 @@ A multi-organization calendar system for communities to share their calendars.
 
 Individuals can also belong to calendars, including private ones if given permissions.
 
+## Quick Start
+
+```bash
+git clone git@github.com:survos/calendar-bundle-demo.git
+cd calendar-bundle-demo/
+composer install
+yarn install && yarn dev
+bin/console d:database:create
+bin/console d:schema:update --force --complete
+bin/console doctrine:fixtures:load -n
+
+# 
+symfony proxy:domain:attach calendar-demo
+symfony server:start -d
+
+# OR php -S localhost:8300 -t public/
+```
+
+
+
 ## Workflow 
 
 * Individuals sign in ("users")
