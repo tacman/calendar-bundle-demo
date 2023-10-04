@@ -41,8 +41,8 @@
 
     {{ debug ? 'DEBUG' }}
     {#                            todo: OptionsResolver for the theme #}
+{#    "template"      : "@SurvosBase/adminlte/knp_menu.html.twig",#}
     {% set menuHtml = knp_menu_render(menuItem, {
-        "template"      : "@SurvosBase/adminlte/knp_menu.html.twig",
         "debug": debug|default(false),
         currentAsLink: true,
         firstClass: 'f',

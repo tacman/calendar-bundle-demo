@@ -4,22 +4,7 @@
 
 {% block body %}
 
-{% import "@SurvosBase/macros/cards.html.twig" as card_widget %}
-
-{% set _controller = 'orgs' %}
-
-<h3>Orgs</h3>
-<div {{ stimulus_controller(_controller, {
-     class: class,
-     api_call: api_route(class),
-     sortableFields: sortable_fields(class),
-     filter: filter,
-     }) }}>
-
-    {{ card_widget.entityTable({
-    stimulusController: _controller
-    }) }}
-</div>
+    @todo: add grid bundle for {{ class }}
 
 
 {% endblock %}

@@ -5,7 +5,6 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\EventRepository;
 use Doctrine\ORM\Mapping as ORM;
-use Survos\BaseBundle\Entity\SurvosBaseEntity;
 use Survos\CoreBundle\Entity\RouteParametersInterface;
 use Survos\CoreBundle\Entity\RouteParametersTrait;
 use Survos\WorkflowBundle\Traits\MarkingInterface;

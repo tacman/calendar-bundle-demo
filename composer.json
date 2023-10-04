@@ -121,7 +121,7 @@
         "doctrine/doctrine-fixtures-bundle": "^3.4",
         "friendsofphp/php-cs-fixer": "^3.8",
         "spatie/ray": "^1.34",
-        "survos/maker-bundle": "dev-main",
+        "survos/maker-bundle": "^1.5",
         "symfony/debug-bundle": "^6.0",
         "symfony/maker-bundle": "^1.38",
         "symfony/stopwatch": "^6.0",
@@ -140,14 +140,6 @@
         "survos_admin_bundle": {
             "type": "vcs",
             "url": "git@github.com:survos/SurvosAdminBundle.git"
-        },
-        "survos_base_bundle": {
-            "type": "vcs",
-            "url": "git@github.com:survos/BaseBundle.git"
-        },
-        "survos_maker_bundle": {
-            "type": "vcs",
-            "url": "git@github.com:survos/AdminMakerBundle.git"
         }
     }
 }
