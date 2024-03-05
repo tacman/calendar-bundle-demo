@@ -9,9 +9,7 @@
 import './styles/app.css';
 
 // start the Stimulus application
-import './bootstrap';
-
-// require('bootstrap');
-
-// import 'mmenu-light';
+import './bootstrap.js';
+import 'bootstrap'
+import 'bootstrap/dist/css/bootstrap.min.css'
 

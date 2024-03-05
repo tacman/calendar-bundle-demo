@@ -2,10 +2,10 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiFilter;
-use ApiPlatform\Core\Annotation\ApiResource;
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Metadata\Annotation\ApiFilter;
+use ApiPlatform\Metadata\Annotation\ApiResource;
+use ApiPlatform\Metadata\Bridge\Doctrine\Orm\Filter\OrderFilter;
+use ApiPlatform\Metadata\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use App\Api\Filter\MultiFieldSearchFilter;
 use App\Repository\OrgRepository;
 use Doctrine\Common\Collections\ArrayCollection;

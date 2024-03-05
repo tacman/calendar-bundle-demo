@@ -2,7 +2,7 @@
 
 namespace App\Twig;
 
-use ApiPlatform\Core\Api\IriConverterInterface;
+use ApiPlatform\Api\IriConverterInterface;
 //use ApiPlatform\Api\IriConverterInterface;
 //use ApiPlatform\Api\UrlGeneratorInterface;
 use Twig\Extension\AbstractExtension;
