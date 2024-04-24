@@ -1,5 +1,4 @@
 import { Controller } from '@hotwired/stimulus';
-
 import { Calendar } from '@fullcalendar/core';
 import iCalendarPlugin from '@fullcalendar/icalendar'
 import interactionPlugin from '@fullcalendar/interaction';

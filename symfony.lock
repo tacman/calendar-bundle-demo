@@ -175,9 +175,6 @@
     "johngrogg/ics-parser": {
         "version": "v3.1.1"
     },
-    "kevinpapst/tabler-bundle": {
-        "version": "0.3"
-    },
     "knplabs/knp-menu": {
         "version": "v3.3.0"
     },
@@ -630,18 +627,6 @@
             "config/routes/web_profiler.yaml"
         ]
     },
-    "symfony/webapp-meta": {
-        "version": "1.0",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "master",
-            "version": "1.0",
-            "ref": "67cae591d131c133d63b893c5324796b88c59b34"
-        },
-        "files": [
-            "config/packages/messenger.yaml"
-        ]
-    },
     "symfony/webpack-encore-bundle": {
         "version": "1.14",
         "recipe": {
@@ -699,12 +684,6 @@
     },
     "twig/twig": {
         "version": "v3.3.8"
-    },
-    "umbrella2/adminbundle": {
-        "version": "v6.1"
-    },
-    "umbrella2/corebundle": {
-        "version": "v6.1"
     },
     "webmozart/assert": {
         "version": "1.10.0"

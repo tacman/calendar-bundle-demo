@@ -1,0 +1,69 @@
+{% extends "@SurvosBootstrap/sneat/base.html.twig" %}
+
+{% block javascripts %}
+{{ encore_entry_script_tags('app') }}
+{{ parent() }}
+{% endblock %}
+
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('app') }}
+    {{ parent() }}
+{% endblock %}
+
+        {% block items_container %}
+            {{ parent }}
+            {{ block('feeds') }}
+        {% endblock %}
+
+
+{% block feeds %}
+    <div class="sidebar-cta">
+        <div class="sidebar-cta-content">
+            <strong class="d-inline-block mb-2">Upgrade to Pro</strong>
+            <div class="mb-3 text-sm">
+                Are you looking for more components? Check out our premium version.
+            </div>
+            <div class="d-grid">
+                <a href="upgrade-to-pro.html" class="btn btn-primary">Upgrade to Pro</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block knp_sidebar %}
+    {% set menuCode = 'sidebar_menu' %}
+    {% set menuItem = knp_menu_get(menuCode, [],  {
+        'comment': "This is an option passed in knp_menu_get",
+        'menu_code'     : menuCode,
+    }) %}
+
+    {{ debug ? 'DEBUG' }}
+    {#                            todo: OptionsResolver for the theme #}
+{#    "template"      : "@SurvosBase/adminlte/knp_menu.html.twig",#}
+    {% set menuHtml = knp_menu_render(menuItem, {
+        "debug": debug|default(false),
+        currentAsLink: true,
+        firstClass: 'f',
+        "currentClass"  : "active",
+        "ancestorClass" : "nav-item menu-open",
+        "branch_class"  : "nav-item",
+        'leaf_class'    : 'nav-item leaf',
+        'link_class'    : 'nav-link',
+        "allow_safe_labels": true,
+        'rootAttributes': {
+            'class': 'nav nav-pills nav-sidebar flex-column',
+            'data-lte-toggle': 'treeview',
+            'data-accordian': 'false',
+            'role': 'menu'
+        },
+
+        'comment': "This is an option passed in knp_menu_render",
+    })
+    %}
+
+
+{#    {% set admin_menu = get_menu('App\\Menu\\AdminMenu', {  }) %}#}
+{#    {{ render_menu(admin_menu, {  }) }}#}
+{% endblock %}
