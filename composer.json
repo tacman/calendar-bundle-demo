@@ -20,14 +20,18 @@
         "kevinpapst/tabler-bundle": "dev-tac",
         "knplabs/knp-menu-bundle": "^3.2",
         "league/commonmark": "^2.2",
+        "meilisearch/meilisearch-php": "^1.6",
         "nelmio/cors-bundle": "^2.2",
         "nesbot/carbon": "^2.57",
+        "nyholm/psr7": "^1.0",
         "phpdocumentor/reflection-docblock": "^5.3",
         "phpstan/phpdoc-parser": "^1.2",
         "spatie/icalendar-generator": "^2.3",
         "stof/doctrine-extensions-bundle": "^1.7",
+        "survos/api-grid-bundle": "*",
         "survos/bootstrap-bundle": "^1.4",
         "symfony/asset": "^6.0",
+        "symfony/asset-mapper": "^6.1",
         "symfony/config": "^6.0",
         "symfony/console": "^6.0",
         "symfony/doctrine-messenger": "^6.0",
@@ -36,7 +40,7 @@
         "symfony/flex": "^2",
         "symfony/form": "^6.0",
         "symfony/framework-bundle": "^6.0",
-        "symfony/http-client": "^6.0",
+        "symfony/http-client": "^6.1",
         "symfony/intl": "^6.0",
         "symfony/mailer": "^6.0",
         "symfony/mime": "^6.0",
@@ -49,28 +53,28 @@
         "symfony/runtime": "^6.0",
         "symfony/security-bundle": "^6.0",
         "symfony/serializer": "^6.0",
+        "symfony/stimulus-bundle": "^2.16",
         "symfony/string": "^6.0",
         "symfony/translation": "^6.0",
         "symfony/twig-bundle": "^6.0",
         "symfony/validator": "^6.0",
         "symfony/web-link": "^6.0",
         "symfony/webapp-meta": "^1.0",
-        "symfony/webpack-encore-bundle": "^1.12",
         "symfony/workflow": "^6.1",
         "symfony/yaml": "^6.0",
         "tabler/tabler": "^0.0.33",
         "tattali/calendar-bundle": "^1.2",
         "twig/extra-bundle": "^2.12|^3.0",
         "twig/markdown-extra": "^3.3",
-        "twig/twig": "^2.12|^3.0",
-        "umbrella2/adminbundle": "^6.1"
+        "twig/twig": "^2.12|^3.0"
     },
     "config": {
         "allow-plugins": {
             "composer/package-versions-deprecated": true,
             "symfony/flex": true,
             "symfony/runtime": true,
-            "endroid/installer": true
+            "endroid/installer": true,
+            "php-http/discovery": true
         },
         "optimize-autoloader": true,
         "preferred-install": {
@@ -100,7 +104,8 @@
         "auto-scripts": {
             "cache:clear": "symfony-cmd",
             "fos:js-routing:dump --format=json --target=public/js/fos_js_routes.json": "symfony-cmd",
-            "assets:install %PUBLIC_DIR%": "symfony-cmd"
+            "assets:install %PUBLIC_DIR%": "symfony-cmd",
+            "importmap:install": "symfony-cmd"
         },
         "post-install-cmd": [
             "@auto-scripts"

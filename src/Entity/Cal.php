@@ -2,11 +2,12 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Metadata\Annotation\ApiFilter;
-use ApiPlatform\Metadata\Annotation\ApiResource;
-use ApiPlatform\Metadata\Bridge\Doctrine\Orm\Filter\OrderFilter;
-use ApiPlatform\Metadata\Bridge\Doctrine\Orm\Filter\SearchFilter;
-use App\Api\Filter\MultiFieldSearchFilter;
+use ApiPlatform\Metadata\ApiFilter;
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Doctrine\Orm\Filter\OrderFilter;
+use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
+use Survos\ApiGrid\Api\Filter\MultiFieldSearchFilter;
+
 use App\Repository\CalRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;

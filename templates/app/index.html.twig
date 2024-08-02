@@ -17,42 +17,7 @@
 
 <div class="col-md-6 col-lg-4">
 
-    {% if admin_menu is not defined %}
-    {% set admin_menu = get_menu(admin.menuName()) %}
-    {% endif %}
-{#    {{ render_menu(admin_menu) }}#}
-
-
-
-
-    {% for child in admin_menu.root.children|filter(c => c.children|length ) %}
-    <div class="col-md-6 col-lg-4">
-        {% embed '_partial/card.html.twig' with {
-        } %}
-            {% block title child.label %}
-            {% block subtitle "%s.subtitle"|format(child.label)|trans|markdown_to_html %}
-            {% block text %}
-                {{  "%s.description"|format(child.label)|trans|markdown_to_html }}
-
-                <ul class="list-inline">
-                    {% for subMenu in child.children %}
-                        <li class="list-inline-item">
-                            <a class="btn btn-sm btn-primary" href="{{ path(subMenu.route, subMenu.routeParams) }}" class="card-link">{{ subMenu.label|trans }}</a>
-                        </li>
-                    {% endfor %}
-                </ul>
-
-            {% endblock %}
-            {% block footer %}
-                <a href="#" class="card-link">Card link</a>
-
-                Footer
-            {% endblock %}
-
-        {% endembed %}
-    </div>
-
-    {% endfor %}
+    Idea: sitemap or menu.
 
 </div>
 {% endblock %}

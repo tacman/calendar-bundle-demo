@@ -8,7 +8,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
-use Umbrella\CoreBundle\Form\DatepickerType;
 
 class BookingType extends AbstractType
 {
@@ -17,13 +16,12 @@ class BookingType extends AbstractType
         $builder
             ->add('title')
         ;
-        $builder->add('beginAt', DatepickerType::class, [
+        $builder->add('beginAt', null, [
             'required' => false,
-            'enable_time' => true
         ]);
         $builder->add('durationInMinutes');
 
-        $builder->add('endAt', DatepickerType::class, [
+        $builder->add('endAt', null, [
             'required' => false
         ]);
 

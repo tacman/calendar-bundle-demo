@@ -1,6 +1,7 @@
 {% extends "@SurvosBootstrap/%s/base.html.twig"|format(theme) %}
 
 {% block javascripts %}
+            {% block importmap %}{{ importmap('app') }}{% endblock %}
 {{ encore_entry_script_tags('app') }}
 {{ parent() }}
 {% endblock %}

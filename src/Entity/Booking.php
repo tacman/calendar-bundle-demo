@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Metadata\Annotation\ApiResource;
+use ApiPlatform\Metadata\ApiResource;
 use App\Repository\BookingRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\{Entity, Column, Id, GeneratedValue};
