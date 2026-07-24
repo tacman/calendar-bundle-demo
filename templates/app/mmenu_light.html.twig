@@ -6,9 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
     <title>mmenu - Demo</title>
-
-    {{ encore_entry_link_tags('app') }}
-
 <body {{ stimulus_controller('mmenu_light') }}>
 <div id="page">
 
@@ -53,7 +50,7 @@
     </ul>
 </nav>
 
-{{ encore_entry_script_tags('app') }}
+{{ importmap('app') }}
 </body>
 </html>
 

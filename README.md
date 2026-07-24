@@ -60,6 +60,58 @@ FullCalendar.
 `bin/console app:load-demo-feeds` reads the demo calendar list straight from the
 installed bundle (`vendor/survos/ux-calendar-bundle/demo/...`) and upserts `Feed` rows.
 
+## Asset pipeline notes
+
+ccal is intentionally an AssetMapper/importmap app. There is no active Yarn or Webpack build pipeline.
+
+The active browser entrypoint is `app` in `importmap.php`:
+
+```php
+'app' => ['path' => './assets/app.js', 'entrypoint' => true],
+```
+
+`assets/app.js` imports `assets/styles/app.css` and starts Stimulus through
+`assets/bootstrap.js`. The base layout renders that entrypoint with:
+
+```twig
+{{ importmap('app') }}
+```
+
+Do not add legacy entrypoint helper tags back to the Twig layouts. Those helpers belonged to the old frontend build setup and are not part of this AssetMapper app.
+
+The old Yarn lockfile was removed. Frontend packages that are needed by the app
+should be managed through `importmap.php` and installed with:
+
+```bash
+php bin/console importmap:install
+```
+
+Use AssetMapper for verification and deployment:
+
+```bash
+php bin/console lint:twig templates
+php bin/console asset-map:compile
+```
+
+When running `asset-map:compile` locally in dev, Symfony writes generated files to
+`public/assets`. Delete that directory after verification so the dev server keeps
+serving fresh mapped assets:
+
+```bash
+rm -rf public/assets
+```
+
+### Current cleanup status
+
+* Removed legacy asset helper calls from the base layout and old demo templates.
+* Replaced the standalone `mmenu_light` demo's legacy script tag with
+  `{{ importmap('app') }}`.
+* Deleted the obsolete `yarn.lock`.
+* Fixed stale demo-template Twig syntax that prevented a full `lint:twig` pass.
+* Verified `php bin/console lint:twig templates`.
+* Verified `php bin/console asset-map:compile`, then removed generated
+  `public/assets`.
+
 ## Tools
 
 * iCal parsing: [`johngrogg/ics-parser`](https://github.com/u01jmg3/ics-parser)
