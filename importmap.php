@@ -81,4 +81,5 @@ return [
     'fullcalendar/daygrid' => ['version' => '7.0.0-beta.8'],
     'fullcalendar/timegrid' => ['version' => '7.0.0-beta.8'],
     'fullcalendar/list' => ['version' => '7.0.0-beta.8'],
+    'flag-icons/css/flag-icons.min.css' => ['version' => '7.5.0', 'type' => 'css'],
 ];

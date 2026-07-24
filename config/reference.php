@@ -127,7 +127,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  * }
  * @psalm-type ServicesConfig = array{
  *     _defaults?: DefaultsType,
- *     _instanceof?: InstanceofType,
+ *     _instanceof?: array<class-string, InstanceofType>,
  *     ...<string, DefinitionType|AliasType|PrototypeType|StackType|ArgumentsType|null>
  * }
  * @psalm-type ExtensionType = array<string, mixed>
@@ -1944,8 +1944,9 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *     ignore_not_found?: bool|Param, // Ignore error when an icon is not found. Set to 'true' to fail silently. // Default: false
  * }
  * @psalm-type SurvosFieldConfig = array{
- *     routes_enabled?: bool|Param, // Set false to manage this bundle's routes manually in your app. // Default: true
+ *     routes_enabled?: bool|Param, // Set false to manage this bundle's routes manually in your app. Bundles exposing sensitive routes (e.g. running console commands) should default this off. // Default: true
  *     route_prefix?: scalar|Param|null, // URL prefix applied to all routes from this bundle. // Default: ""
+ *     locale_prefix?: bool|Param, // Prepend {_locale} (constrained to kernel.enabled_locales) to this bundle's route prefix, e.g. /{_locale}/f instead of /f -- for bundles whose routes are meant to be shared/bookmarked, so the URL itself carries the locale instead of a query param. // Default: false
  * }
  * @psalm-type SurvosTablerConfig = array{
  *     icons?: array{
@@ -2005,6 +2006,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *     },
  *     debug?: array{
  *         menu_slots?: bool|Param, // Default: false
+ *         admin_toolbar?: bool|Param, // Render the orange admin menu toolbar (navbar_admin) for admins/debug. Defaults to the TABLER_ADMIN_TOOLBAR env var (1); developers can set TABLER_ADMIN_TOOLBAR=0 in .env.local to hide it. // Default: "%env(bool:TABLER_ADMIN_TOOLBAR)%"
  *     },
  *     options?: array{
  *         theme?: scalar|Param|null, // Default: "tabler"
@@ -2014,6 +2016,9 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *     },
  *     menu_options?: array<string, scalar|Param|null>,
  *     impersonate?: array<string, scalar|Param|null>,
+ *     routes_enabled?: bool|Param, // Set false to manage this bundle's routes manually in your app. Bundles exposing sensitive routes (e.g. running console commands) should default this off. // Default: true
+ *     route_prefix?: scalar|Param|null, // URL prefix applied to all routes from this bundle. // Default: ""
+ *     locale_prefix?: bool|Param, // Prepend {_locale} (constrained to kernel.enabled_locales) to this bundle's route prefix, e.g. /{_locale}/f instead of /f -- for bundles whose routes are meant to be shared/bookmarked, so the URL itself carries the locale instead of a query param. // Default: false
  * }
  * @psalm-type SurvosUxCalendarConfig = array{
  *     stimulus_controller?: scalar|Param|null, // Default: "@survos/ux-calendar-bundle/fullcalendar"
