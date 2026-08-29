@@ -8,6 +8,18 @@
             "search": {
                 "enabled": true,
                 "fetch": "lazy"
+            },
+            "clipboard": {
+                "enabled": true,
+                "fetch": "lazy"
+            },
+            "closeable": {
+                "enabled": true,
+                "fetch": "lazy"
+            },
+            "tooltip": {
+                "enabled": true,
+                "fetch": "lazy"
             }
         },
         "@survos/ux-calendar-bundle": {

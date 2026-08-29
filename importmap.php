@@ -82,4 +82,8 @@ return [
     'fullcalendar/timegrid' => ['version' => '7.0.0-beta.8'],
     'fullcalendar/list' => ['version' => '7.0.0-beta.8'],
     'flag-icons/css/flag-icons.min.css' => ['version' => '7.5.0', 'type' => 'css'],
+    '@floating-ui/dom' => ['version' => '1.8.0'],
+    '@floating-ui/core' => ['version' => '1.8.0'],
+    '@floating-ui/utils' => ['version' => '0.2.12'],
+    '@floating-ui/utils/dom' => ['version' => '0.2.12'],
 ];
